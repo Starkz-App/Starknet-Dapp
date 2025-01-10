@@ -44,7 +44,7 @@ export const publications: Publication[] = [
   {
     id: '1',
     title: 'Understanding zk-STARKs: A Comprehensive Guide',
-    content: '...',
+    content: 'Understanding zk-STARKs: A Comprehensive Guide',
     author: authors[0],
     publishedAt: '2023-06-15T10:00:00Z',
     readTime: '10 min read',
@@ -57,7 +57,7 @@ export const publications: Publication[] = [
   {
     id: '2',
     title: 'Implementing Zero-Knowledge Proofs in Rust',
-    content: '...',
+    content: 'Implementing Zero-Knowledge Proofs in Rust',
     author: authors[1],
     publishedAt: '2023-06-20T14:30:00Z',
     readTime: '8 min read',
@@ -70,7 +70,7 @@ export const publications: Publication[] = [
   {
     id: '3',
     title: 'The Future of Privacy in Blockchain: zk-STARKs and Beyond',
-    content: '...',
+    content: 'The Future of Privacy in Blockchain: zk-STARKs and Beyond',
     author: authors[2],
     publishedAt: '2023-06-25T09:15:00Z',
     readTime: '12 min read',

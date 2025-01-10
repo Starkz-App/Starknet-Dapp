@@ -15,17 +15,17 @@ import Image from 'next/image'
 
 // Mock data for featured collections
 const featuredCollections = [
-  { id: '1', title: 'Web Development Essentials', articlesCount: 15, followers: 1200 },
-  { id: '2', title: 'Machine Learning Fundamentals', articlesCount: 12, followers: 980 },
-  { id: '3', title: 'Blockchain Technology', articlesCount: 10, followers: 850 },
-  { id: '4', title: 'Data Science Techniques', articlesCount: 18, followers: 1500 },
+  { id: '1', title: 'zk-STARKs', articlesCount: 15, followers: 1200 },
+  { id: '2', title: 'Quantum Resistance', articlesCount: 12, followers: 980 },
+  { id: '3', title: 'Blockchain', articlesCount: 10, followers: 850 },
+  { id: '4', title: 'Validity Rollup', articlesCount: 18, followers: 1500 },
 ]
 
 // Mock data for recent store activity
 const recentStoreActivity = [
-  { id: '1', user: 'Alice', action: 'purchased', product: 'Cosmic Voyage NFT', timestamp: '2 minutes ago' },
-  { id: '2', user: 'Bob', action: 'added to cart', product: 'Advanced ML Techniques', timestamp: '15 minutes ago' },
-  { id: '3', user: 'Charlie', action: 'reviewed', product: 'Blockchain Fundamentals Course', timestamp: '1 hour ago' },
+  { id: '1', user: 'Eli', action: 'purchased', product: 'Cosmic Voyage NFT', timestamp: '2 minutes ago' },
+  { id: '2', user: 'Pedro', action: 'added to cart', product: 'Advanced ML Techniques', timestamp: '15 minutes ago' },
+  { id: '3', user: 'Robert', action: 'reviewed', product: 'Blockchain Fundamentals Course', timestamp: '1 hour ago' },
   { id: '4', user: 'David', action: 'purchased', product: 'Quantum Computing Simulator', timestamp: '3 hours ago' },
 ]
 
@@ -42,14 +42,14 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[500px] rounded-lg overflow-hidden">
         <Image
-          src="/hero-image.jpg"
-          alt="Knowledge Sharing Hero"
+          src="/background.jpg"
+          alt="Starkz"
           layout="fill"
           objectFit="cover"
           className="absolute inset-0"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-6">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 text-center">Welcome to Starkz Knowledge Hub</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 text-center">Starkz Knowledge Hub</h1>
           <p className="text-lg md:text-xl mb-8 text-center max-w-2xl">Discover, share, and earn rewards for your knowledge in a decentralized ecosystem</p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <Button size="lg" asChild className="bg-primary text-primary-foreground hover:bg-primary/90">

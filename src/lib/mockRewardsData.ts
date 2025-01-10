@@ -1,8 +1,8 @@
 export const mockRewardsData = {
   tipAmount: 0.05,
-  tipCurrency: 'ETH',
+  tipCurrency: 'STRK',
   donationGoal: 1000,
-  donationCurrency: 'USDC',
+  donationCurrency: 'STRK',
   rewardTiers: [
     { amount: 5, reward: '24-hour early access' },
     { amount: 20, reward: 'Exclusive digital badge' },
@@ -12,7 +12,7 @@ export const mockRewardsData = {
   contentNFT: {
     enabled: false,
     basePrice: 0.1,
-    currency: 'ETH',
+    currency: 'STRK',
     maxSupply: 100,
   },
 }
