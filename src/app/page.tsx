@@ -365,16 +365,16 @@ export default function Home() {
 
 
       {/* Rewards Section */}
-      <section className="py-20 bg-background/30 rounded-lg">
-        <div className="container mx-auto px-4">
+      <section className="py-20">
+        <div className="container mx-auto">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">Earn Rewards</h2>
             <Button variant="secondary" asChild>
               <Link href="/rewards">View All Rewards</Link>
             </Button>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="bg-background text-foreground">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+            <Card className="bg-background/60">
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Gift className="mr-2 h-5 w-5" /> Content Creation
@@ -385,7 +385,7 @@ export default function Home() {
                 <Badge variant="secondary">Up to 500 STZ per article</Badge>
               </CardContent>
             </Card>
-            <Card className="bg-background text-foreground">
+            <Card className="bg-background/60">
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <ThumbsUp className="mr-2 h-5 w-5" /> Engagement
@@ -396,7 +396,7 @@ export default function Home() {
                 <Badge variant="secondary">1-10 STZ per interaction</Badge>
               </CardContent>
             </Card>
-            <Card className="bg-background text-foreground">
+            <Card className="bg-background/60">
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Users className="mr-2 h-5 w-5" /> Referrals
@@ -439,7 +439,7 @@ export default function Home() {
           </Button>
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {publications.slice(0, 4).map((publication, index) => (
+          {publications.slice(0, 5).map((publication, index) => (
             <Card key={publication.id} className="glass-card">
               <CardContent className="flex items-center p-6">
                 <Avatar className="h-16 w-16 mr-4">
