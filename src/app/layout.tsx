@@ -11,8 +11,8 @@ import { BottomNav } from '@/components/BottomNav'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'IP Marketplace Dashboard',
-  description: 'Intellectual Property Marketplace with Blockchain Technology',
+  title: 'Starkz - From AI to ZK',
+  description: 'A decentralized public knowledge hub powered on Starknet',
 }
 
 export default function RootLayout({

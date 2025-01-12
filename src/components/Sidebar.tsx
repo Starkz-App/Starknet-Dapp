@@ -12,14 +12,10 @@ const navItems = [
   { icon: Home, href: '/', label: 'Dashboard' },
   { icon: PlusCircle, href: '/new', label: 'New' },
   { icon: Search, href: '/explore', label: 'Explore' },
-  { icon: Briefcase, href: '/business-services', label: 'Business Services' },
-  { icon: FileText, href: '/transactions', label: 'Transactions' },
+  { icon: TrendingUp, href: '/popular', label: 'Popular' },
   { icon: Users, href: '/profile', label: 'Profile' },
   { icon: Gift, href: '/rewards', label: 'Rewards' },
-  { icon: TrendingUp, href: '/popular', label: 'Popular' },
-  { icon: Settings, href: '/settings', label: 'Settings' },
-  { icon: ShoppingBag, href: '/store', label: 'Shop' },
-]
+  { icon: Settings, href: '/settings', label: 'Settings' },]
 
 export function Sidebar() {
   const pathname = usePathname()
