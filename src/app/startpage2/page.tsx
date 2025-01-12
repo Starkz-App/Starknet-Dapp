@@ -21,10 +21,10 @@ import Image from 'next/image'
 
 // Mock data for featured collections
 const featuredCollections = [
-  { id: '1', title: 'zk-STARKs', articlesCount: 15, followers: 120 },
-  { id: '2', title: 'Quantum Resistance', articlesCount: 12, followers: 280 },
-  { id: '3', title: 'Blockchain', articlesCount: 10, followers: 85 },
-  { id: '4', title: 'Validity Rollup', articlesCount: 18, followers: 150 },
+  { id: '1', title: 'zk-STARKs', articlesCount: 15, followers: 1200 },
+  { id: '2', title: 'Quantum Resistance', articlesCount: 12, followers: 980 },
+  { id: '3', title: 'Blockchain', articlesCount: 10, followers: 850 },
+  { id: '4', title: 'Validity Rollup', articlesCount: 18, followers: 1500 },
 ]
 
 // Mock data for recent store activity
@@ -49,7 +49,7 @@ export default function Home() {
 
 
 
-
+  
   const [popularProducts, setPopularProducts] = useState<Product[]>([])
 
   useEffect(() => {
@@ -62,17 +62,6 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
-
-
-
-
-
-
-
-
-
-
-
       {/* Hero Section */}
       <section className="relative h-[500px] rounded-lg overflow-hidden">
         <Image
@@ -95,19 +84,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* Quick Stats Section */}
       <section className="py-8">
@@ -155,16 +131,6 @@ export default function Home() {
           </Card>
         </div>
       </section>
-
-
-
-
-
-
-
-
-
-
 
       {/* Featured Articles Section */}
       <section className="py-8">
@@ -217,128 +183,63 @@ export default function Home() {
         </div>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-               {/* Trending Topics Section */}
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Trending Topics</h2>
-        <div className="flex flex-wrap gap-2">
-          {Array.from(new Set(publications.flatMap(pub => pub.tags))).slice(0, 10).map((tag, index) => (
-            <Button key={tag} variant="outline" size="sm" asChild>
-              <Link href={`/tags/${tag}`}>
-                <Tag className="mr-1 h-3 w-3" />
-                {tag}
-                <Badge variant="secondary" className="ml-2">{index + 1}</Badge>
-              </Link>
-            </Button>
-          ))}
-        </div>
-      </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Featured Collections Section */}
+      {/* Popular Products Section */}
       <section className="py-8">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Featured Topics</h2>
+          <h2 className="text-2xl font-bold">Popular Products</h2>
           <Button variant="ghost" asChild>
-            <Link href="/collections">View All <ChevronRight className="ml-1 h-4 w-4" /></Link>
+            <Link href="/store">View All <ChevronRight className="ml-1 h-4 w-4" /></Link>
           </Button>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {featuredCollections.map((collection) => (
-            <Card className='bg-background/60' key={collection.id}>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {popularProducts.map((product) => (
+            <Card key={product.id} className="flex flex-col">
+              <div className="relative h-48">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-t-lg"
+                />
+              </div>
               <CardHeader>
-                <CardTitle>{collection.title}</CardTitle>
-                <CardDescription>{collection.articlesCount} articles</CardDescription>
+                <CardTitle className="line-clamp-1">{product.name}</CardTitle>
+                <CardDescription>By {product.author}</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <span>{collection.followers} likes</span>
-                  <Button variant="ghost" size="sm">
-                    <Bookmark className="mr-1 h-4 w-4" /> Share
+              <CardContent className="flex-grow">
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{product.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-bold">{product.price} ETH</span>
+                  <Button asChild>
+                    <Link href={`/store/product/${product.id}`}>
+                      <ShoppingCart className="mr-2 h-4 w-4" /> View Product
+                    </Link>
                   </Button>
                 </div>
-              </CardContent>
-              <CardContent>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href={`/collections/${collection.id}`}>View</Link>
-                </Button>
               </CardContent>
             </Card>
           ))}
         </div>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Recent Articles Section */}
-      <section>
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Recent Articles</h2>
-          <Button variant="ghost" asChild>
-            <Link href="/publications">View All <ArrowUpRight className="ml-1 h-4 w-4" /></Link>
-          </Button>
-        </div>
-        <Card className="glass-card">
+      {/* Recent Store Activity */}
+      <section className="py-8">
+        <h2 className="text-2xl font-bold mb-4">Recent Store Activity</h2>
+        <Card>
           <CardContent className="p-0">
-            <ul className="divide-y divide-gray-200">
-              {publications.slice(0, 5).map((article) => (
-                <li key={article.id} className="p-4 flex items-center">
+            <ul className="divide-y divide-border">
+              {recentStoreActivity.map((activity) => (
+                <li key={activity.id} className="p-4 flex items-center">
                   <Avatar className="h-10 w-10 mr-4">
-                    <AvatarImage src={article.author.avatar} alt={article.author.name} />
-                    <AvatarFallback>{article.author.name[0]}</AvatarFallback>
+                    <AvatarImage src={`https://avatar.vercel.sh/${activity.user}.png`} alt={activity.user} />
+                    <AvatarFallback>{activity.user.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">{article.title}</p>
-                    <p className="text-sm text-gray-500">By {article.author.name} • {article.category}</p>
-                  </div>
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                    <ThumbsUp className="h-4 w-4" />
-                    <span>{article.likes}</span>
-                    <MessageSquare className="h-4 w-4" />
-                    <span>{article.views}</span>
+                    <p className="text-sm font-medium text-foreground truncate">
+                      {activity.user} {activity.action} {activity.product}
+                    </p>
+                    <p className="text-sm text-muted-foreground">{activity.timestamp}</p>
                   </div>
                 </li>
               ))}
@@ -347,22 +248,41 @@ export default function Home() {
         </Card>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      {/* Featured Collections Section */}
+      <section className="py-8">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">Featured Collections</h2>
+          <Button variant="ghost" asChild>
+            <Link href="/collections">View All <ChevronRight className="ml-1 h-4 w-4" /></Link>
+          </Button>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {featuredCollections.map((collection) => (
+            <Card key={collection.id}>
+              <CardHeader>
+                <CardTitle>{collection.title}</CardTitle>
+                <CardDescription>{collection.articlesCount} articles</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between text-sm text-muted-foreground">
+                  <span>{collection.followers} followers</span>
+                  <Button variant="ghost" size="sm">
+                    <Bookmark className="mr-1 h-4 w-4" /> Follow
+                  </Button>
+                </div>
+              </CardContent>
+              <CardContent>
+                <Button variant="outline" className="w-full" asChild>
+                  <Link href={`/collections/${collection.id}`}>View Collection</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
 
       {/* Rewards Section */}
-      <section className="py-20 bg-background/30 rounded-lg">
+      <section className="py-8 bg-primary text-primary-foreground rounded-lg">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">Earn Rewards</h2>
@@ -408,25 +328,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       {/* Top Contributors Section */}
       <section>
         <div className="flex justify-between items-center mb-4">
@@ -457,76 +358,48 @@ export default function Home() {
         </div>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Featured Content Creator Section */}
-      <section className="py-8">
-        <h2 className="text-2xl font-bold mb-4">Featured Content Creator</h2>
-        <Card className="flex flex-col md:flex-row items-center p-6 glass-card">
-          <Avatar className="h-24 w-24 md:h-32 md:w-32 mb-4 md:mb-0 md:mr-6">
-            <AvatarImage src="https://github.com/shadcn.png" alt="Featured Creator" />
-            <AvatarFallback>FC</AvatarFallback>
-          </Avatar>
-          <div className="flex-grow">
-            <h3 className="text-xl font-semibold mb-2">John Doe</h3>
-            <p className="text-muted-foreground mb-4">Blockchain Expert | 500+ Articles | 10k+ Followers</p>
-            <p className="mb-4">John is a leading voice in blockchain technology, known for his insightful articles and innovative research.</p>
-            <Button asChild>
-              <Link href="/profile/johndoe">View Profile</Link>
+      {/* Trending Topics Section */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Trending Topics</h2>
+        <div className="flex flex-wrap gap-2">
+          {Array.from(new Set(publications.flatMap(pub => pub.tags))).slice(0, 10).map((tag, index) => (
+            <Button key={tag} variant="outline" size="sm" asChild>
+              <Link href={`/tags/${tag}`}>
+                <Tag className="mr-1 h-3 w-3" />
+                {tag}
+                <Badge variant="secondary" className="ml-2">{index + 1}</Badge>
+              </Link>
             </Button>
-          </div>
-        </Card>
+          ))}
+        </div>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Recent Activity */}
-      <section className="py-8">
-        <h2 className="text-2xl font-bold mb-4">Recent Activity</h2>
-        <Card>
+      {/* Recent Articles Section */}
+      <section>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">Recent Articles</h2>
+          <Button variant="ghost" asChild>
+            <Link href="/publications">View All <ArrowUpRight className="ml-1 h-4 w-4" /></Link>
+          </Button>
+        </div>
+        <Card className="glass-card">
           <CardContent className="p-0">
-            <ul className="divide-y divide-border">
-              {recentStoreActivity.map((activity) => (
-                <li key={activity.id} className="p-4 flex items-center">
+            <ul className="divide-y divide-gray-200">
+              {publications.slice(0, 5).map((article) => (
+                <li key={article.id} className="p-4 flex items-center">
                   <Avatar className="h-10 w-10 mr-4">
-                    <AvatarImage src={`https://avatar.vercel.sh/${activity.user}.png`} alt={activity.user} />
-                    <AvatarFallback>{activity.user.charAt(0)}</AvatarFallback>
+                    <AvatarImage src={article.author.avatar} alt={article.author.name} />
+                    <AvatarFallback>{article.author.name[0]}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">
-                      {activity.user} {activity.action} {activity.product}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{activity.timestamp}</p>
+                    <p className="text-sm font-medium text-gray-900 truncate">{article.title}</p>
+                    <p className="text-sm text-gray-500">By {article.author.name} • {article.category}</p>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <ThumbsUp className="h-4 w-4" />
+                    <span>{article.likes}</span>
+                    <MessageSquare className="h-4 w-4" />
+                    <span>{article.views}</span>
                   </div>
                 </li>
               ))}
@@ -535,165 +408,14 @@ export default function Home() {
         </Card>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Quick Start Guide Section */}
-      <section className="py-8">
-        <h2 className="text-2xl font-bold mb-4">How It Works</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card className='bg-background/60'>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <BookOpen className="mr-2 h-5 w-5" /> 1. Explore
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Browse through a vast collection of articles, courses, and digital assets.</p>
-            </CardContent>
-          </Card>
-          <Card className='bg-background/60'>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <PlusCircle className="mr-2 h-5 w-5" /> 2. Create
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Share your knowledge by publishing articles, courses, or listing digital assets.</p>
-            </CardContent>
-          </Card>
-          <Card className='bg-background/60'>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Gift className="mr-2 h-5 w-5" /> 3. Earn
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Get rewarded for your contributions and engagement on the platform.</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-
-
-
-      <section className="py-8">
-          <div className='flex items-center'>
-            <Image src="/background.jpg" alt="Starkz" width={2000} height={600} />
-          </div>
-      </section>
-
-
-
-
-
-
-
-
-
-      {/* Discover Tabs Section */}
-      <Card className="glass-card">
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <Zap className="mr-2 h-4 w-4" />
-            Discover Starkz
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="create" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="learn">Learn</TabsTrigger>
-              <TabsTrigger value="creage">Create</TabsTrigger>
-              <TabsTrigger value="explore">Earn</TabsTrigger>
-            </TabsList>
-            <TabsContent value="learn">
-              <div className="space-y-4 mt-4">
-                <Input placeholder="Learn about Starknet" />
-                <Button className="w-full">Start</Button>
-              </div>
-            </TabsContent>
-            <TabsContent value="create">
-              <div className="space-y-4 mt-4">
-                <Input placeholder="Create your content..." />
-                <Button className="w-full">Publish</Button>
-              </div>
-            </TabsContent>
-            <TabsContent value="explore">
-              <div className="space-y-4 mt-4">
-                <Input placeholder="Start earning" />
-                <Button className="w-full">Discover</Button>
-              </div>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Latest News Section */}
-      <section className="py-8">
-        <h2 className="text-2xl font-bold mb-4">Starkz Updates</h2>
-        <div className="space-y-4">
-          <Card className='glass-card'>
-            <CardHeader>
-              <CardTitle>New Tipping Feature</CardTitle>
-              <CardDescription>2 days ago</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>We've introduced a new tipping feature using Starks tokens. Now you can easily reward your favorite content creators!</p>
-            </CardContent>
-          </Card>
-          <Card className='glass-card'>
-            <CardHeader>
-              <CardTitle>Enhanced Search Functionality</CardTitle>
-              <CardDescription>1 week ago</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Our search engine has been upgraded to provide more accurate and relevant results. Finding the content you need is now easier than ever!</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-
-
-
-
-
-
-      {/* Upcoming Section */}
+      {/* Upcoming Events Section */}
       <section>
-        <h2 className="text-2xl font-bold mb-4">Upcoming Updates</h2>
+        <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { id: 1, title: "New mint feature", date: "2025-01-15", type: "Feature" },
-            { id: 2, title: "View page update", date: "2025-01-22", type: "Updates" },
-            { id: 3, title: "Airdrop to users", date: "2026-01-01", type: "Airdrop" },
+            { id: 1, title: "AI in Healthcare Webinar", date: "2023-07-15", type: "Webinar" },
+            { id: 2, title: "Blockchain Technology Workshop", date: "2023-07-22", type: "Workshop" },
+            { id: 3, title: "Data Science Challenge", date: "2023-08-01", type: "Challenge" },
           ].map((event) => (
             <Card key={event.id} className="glass-card">
               <CardHeader>
@@ -711,15 +433,8 @@ export default function Home() {
         </div>
       </section>
 
-
-
-
-
-
-
-
-           {/* Newsletter Signup Section */}
-      <section className="bg-background/60 rounded-lg p-6">
+      {/* Newsletter Signup Section */}
+      <section className="bg-secondary text-secondary-foreground rounded-lg p-6">
         <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
         <p className="mb-4">Subscribe to our newsletter for the latest articles, events, and rewards.</p>
         <form className="flex gap-2">
@@ -728,19 +443,147 @@ export default function Home() {
         </form>
       </section>
 
+      {/* Quick Actions Section */}
+      <Card className="glass-card">
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <Zap className="mr-2 h-4 w-4" />
+            Quick Actions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="create" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="create">Create Content</TabsTrigger>
+              <TabsTrigger value="explore">Explore Knowledge</TabsTrigger>
+            </TabsList>
+            <TabsContent value="create">
+              <div className="space-y-4 mt-4">
+                <Input placeholder="Enter article title..." />
+                <Button className="w-full">Start Writing</Button>
+              </div>
+            </TabsContent>
+            <TabsContent value="explore">
+              <div className="space-y-4 mt-4">
+                <Input placeholder="Search for topics..." />
+                <Button className="w-full">Discover Articles</Button>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
 
+      {/* Featured Content Creator Section */}
+      <section className="py-8">
+        <h2 className="text-2xl font-bold mb-4">Featured Content Creator</h2>
+        <Card className="flex flex-col md:flex-row items-center p-6">
+          <Avatar className="h-24 w-24 md:h-32 md:w-32 mb-4 md:mb-0 md:mr-6">
+            <AvatarImage src="https://github.com/shadcn.png" alt="Featured Creator" />
+            <AvatarFallback>FC</AvatarFallback>
+          </Avatar>
+          <div className="flex-grow">
+            <h3 className="text-xl font-semibold mb-2">John Doe</h3>
+            <p className="text-muted-foreground mb-4">Blockchain Expert | 500+ Articles | 10k+ Followers</p>
+            <p className="mb-4">John is a leading voice in blockchain technology, known for his insightful articles and innovative research.</p>
+            <Button asChild>
+              <Link href="/profile/johndoe">View Profile</Link>
+            </Button>
+          </div>
+        </Card>
+      </section>
 
+      {/* Quick Start Guide Section */}
+      <section className="py-8">
+        <h2 className="text-2xl font-bold mb-4">How It Works</h2>
+        <div className="grid gap-6 md:grid-cols-3">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <BookOpen className="mr-2 h-5 w-5" /> 1. Explore
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Browse through a vast collection of articles, courses, and digital assets.</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <PlusCircle className="mr-2 h-5 w-5" /> 2. Create
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Share your knowledge by publishing articles, courses, or listing digital assets.</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Gift className="mr-2 h-5 w-5" /> 3. Earn
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Get rewarded for your contributions and engagement on the platform.</p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
+      {/* Latest News Section */}
+      <section className="py-8">
+        <h2 className="text-2xl font-bold mb-4">Latest Platform Updates</h2>
+        <div className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>New Tipping Feature</CardTitle>
+              <CardDescription>2 days ago</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>We've introduced a new tipping feature using Starks tokens. Now you can easily reward your favorite content creators!</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Enhanced Search Functionality</CardTitle>
+              <CardDescription>1 week ago</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Our search engine has been upgraded to provide more accurate and relevant results. Finding the content you need is now easier than ever!</p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
-
-
-
-
-
-
-
-
-
+      {/* Community Highlights Section */}
+      <section className="py-8">
+        <h2 className="text-2xl font-bold mb-4">Community Highlights</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle>Most Liked Article of the Week</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <h3 className="font-semibold mb-2">"The Future of Decentralized Finance"</h3>
+              <p className="text-muted-foreground mb-4">By Alice Johnson</p>
+              <Button variant="outline" asChild>
+                <Link href="/publications/future-of-defi">Read Article</Link>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Top Selling NFT Collection</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <h3 className="font-semibold mb-2">"Cosmic Voyagers"</h3>
+              <p className="text-muted-foreground mb-4">By Digital Dreamers Studio</p>
+              <Button variant="outline" asChild>
+                <Link href="/store/cosmic-voyagers">View Collection</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
     </div>
   )
 }
