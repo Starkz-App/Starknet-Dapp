@@ -51,7 +51,7 @@ export const publications: Publication[] = [
     title: 'Understanding zk-STARKs: A Comprehensive Guide',
     content: 'Content for zk-STARKs article...',
     author: authors[0],
-    publishedAt: '2023-06-15T10:00:00Z',
+    publishedAt: '2025-01-15T10:00:00Z',
     readTime: '10 min read',
     likes: 120,
     hearts: 50,
@@ -69,7 +69,7 @@ export const publications: Publication[] = [
     title: 'Implementing Zero-Knowledge Proofs in Rust',
     content: 'Content for ZKP in Rust article...',
     author: authors[1],
-    publishedAt: '2023-06-20T14:30:00Z',
+    publishedAt: '2025-01-20T14:30:00Z',
     readTime: '8 min read',
     likes: 95,
     hearts: 40,
@@ -87,7 +87,7 @@ export const publications: Publication[] = [
     title: 'The Future of Privacy in Blockchain: zk-STARKs and Beyond',
     content: 'Content for future of privacy article...',
     author: authors[2],
-    publishedAt: '2023-06-25T09:15:00Z',
+    publishedAt: '2025-01-25T09:15:00Z',
     readTime: '12 min read',
     likes: 150,
     hearts: 70,
@@ -112,8 +112,8 @@ export function getPublicationById(id: string): Publication | undefined {
 export function getCommentsByPublicationId(publicationId: string): Comment[] {
   // This is a mock function. In a real application, you would fetch comments from a database.
   return [
-    { id: '1', author: 'Inna', content: 'Great article!', createdAt: '2023-06-26T10:00:00Z' },
-    { id: '2', author: 'Henri', content: 'Very informative, thanks!', createdAt: '2023-06-26T11:30:00Z' },
+    { id: '1', author: 'Inna', content: 'Great article!', createdAt: '2025-01-26T10:00:00Z' },
+    { id: '2', author: 'Henri', content: 'Very informative, thanks!', createdAt: '2025-01-26T11:30:00Z' },
   ];
 }
 

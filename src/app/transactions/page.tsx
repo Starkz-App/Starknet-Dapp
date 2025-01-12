@@ -9,11 +9,11 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const transactions = [
-  { id: '1', title: 'AI Algorithm Purchase', amount: 5000, date: '2023-06-15', status: 'completed' },
-  { id: '2', title: 'Patent Listing Fee', amount: -50, date: '2023-06-14', status: 'completed' },
-  { id: '3', title: 'Royalty Payment', amount: 250, date: '2023-06-13', status: 'pending' },
-  { id: '4', title: 'Software License Sale', amount: 1000, date: '2023-06-12', status: 'completed' },
-  { id: '5', title: 'Trademark Registration', amount: -200, date: '2023-06-11', status: 'processing' },
+  { id: '1', title: 'AI Algorithm Purchase', amount: 5000, date: '2025-01-15', status: 'completed' },
+  { id: '2', title: 'Patent Listing Fee', amount: -50, date: '2025-01-14', status: 'completed' },
+  { id: '3', title: 'Royalty Payment', amount: 250, date: '2025-01-13', status: 'pending' },
+  { id: '4', title: 'Software License Sale', amount: 1000, date: '2025-01-12', status: 'completed' },
+  { id: '5', title: 'Trademark Registration', amount: -200, date: '2025-01-11', status: 'processing' },
 ]
 
 export default function TransactionsPage() {

@@ -94,9 +94,9 @@ export default function PopularPostsPage() {
             <CardHeader>
               <CardTitle className="line-clamp-1 flex items-center gap-2">
                 {getTypeIcon(listing.type)}
-                <span>{listing.title}</span>
+                <span className='text-xl'>{listing.title}</span>
               </CardTitle>
-              <CardDescription>{listing.author} • {new Date(listing.publishedAt).toLocaleDateString()}</CardDescription>
+              <CardDescription>by {listing.author}</CardDescription>
             </CardHeader>
 
             <CardContent className="flex-grow">
@@ -145,7 +145,7 @@ export default function PopularPostsPage() {
               
               <div className="flex items-center space-x-2">
               
-              <span className="font-bold">{listing.price} STRKZ</span>
+              <span className="text-sm">{listing.price} STRKZ</span>
               </div>
 
             </CardFooter>

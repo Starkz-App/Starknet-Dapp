@@ -22,11 +22,11 @@ const mockCollection = {
   collaborative: false,
   articlesCount: 15,
   articles: [
-    { id: '1', title: 'Introduction to HTML', author: 'John Doe', likes: 24, comments: 5, views: 100, excerpt: 'Learn the basics of HTML, the backbone of web development.', tags: ['HTML', 'Web Development'], createdAt: '2023-06-15T10:00:00Z' },
-    { id: '2', title: 'CSS Fundamentals', author: 'Jane Smith', likes: 18, comments: 3, views: 80, excerpt: 'Dive into CSS and learn how to style your web pages effectively.', tags: ['CSS', 'Web Design'], createdAt: '2023-06-14T14:30:00Z' },
-    { id: '3', title: 'JavaScript Basics', author: 'Bob Johnson', likes: 32, comments: 7, views: 150, excerpt: 'Get started with JavaScript and add interactivity to your websites.', tags: ['JavaScript', 'Programming'], createdAt: '2023-06-13T09:15:00Z' },
-    { id: '4', title: 'Responsive Design', author: 'Alice Brown', likes: 15, comments: 2, views: 70, excerpt: 'Learn how to create responsive layouts that work on all devices.', tags: ['Responsive', 'CSS'], createdAt: '2023-06-12T16:45:00Z' },
-    { id: '5', title: 'Introduction to React', author: 'Charlie Davis', likes: 40, comments: 10, views: 200, excerpt: 'Discover React and start building modern web applications.', tags: ['React', 'JavaScript'], createdAt: '2023-06-11T11:20:00Z' },
+    { id: '1', title: 'Introduction to HTML', author: 'John Doe', likes: 24, comments: 5, views: 100, excerpt: 'Learn the basics of HTML, the backbone of web development.', tags: ['HTML', 'Web Development'], createdAt: '2025-01-15T10:00:00Z' },
+    { id: '2', title: 'CSS Fundamentals', author: 'Jane Smith', likes: 18, comments: 3, views: 80, excerpt: 'Dive into CSS and learn how to style your web pages effectively.', tags: ['CSS', 'Web Design'], createdAt: '2025-01-14T14:30:00Z' },
+    { id: '3', title: 'JavaScript Basics', author: 'Bob Johnson', likes: 32, comments: 7, views: 150, excerpt: 'Get started with JavaScript and add interactivity to your websites.', tags: ['JavaScript', 'Programming'], createdAt: '2025-01-13T09:15:00Z' },
+    { id: '4', title: 'Responsive Design', author: 'Alice Brown', likes: 15, comments: 2, views: 70, excerpt: 'Learn how to create responsive layouts that work on all devices.', tags: ['Responsive', 'CSS'], createdAt: '2025-01-12T16:45:00Z' },
+    { id: '5', title: 'Introduction to React', author: 'Charlie Davis', likes: 40, comments: 10, views: 200, excerpt: 'Discover React and start building modern web applications.', tags: ['React', 'JavaScript'], createdAt: '2025-01-11T11:20:00Z' },
   ]
 }
 

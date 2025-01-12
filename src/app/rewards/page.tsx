@@ -104,10 +104,10 @@ export default function RewardsPage() {
             <CardContent>
               <div className="space-y-4">
                 {[
-                  { action: 'Article Published', points: 100, date: '2023-06-15' },
-                  { action: 'Comment Upvotes', points: 25, date: '2023-06-14' },
-                  { action: 'Referral Bonus', points: 200, date: '2023-06-12' },
-                  { action: 'Article Featured', points: 50, date: '2023-06-10' },
+                  { action: 'Article Published', points: 100, date: '2025-01-15' },
+                  { action: 'Comment Upvotes', points: 25, date: '2025-01-14' },
+                  { action: 'Referral Bonus', points: 200, date: '2025-01-12' },
+                  { action: 'Article Featured', points: 50, date: '2025-01-10' },
                 ].map((item, index) => (
                   <div key={index} className="flex items-center justify-between">
                     <div>

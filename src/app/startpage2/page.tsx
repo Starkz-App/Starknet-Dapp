@@ -413,9 +413,9 @@ export default function Home() {
         <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { id: 1, title: "AI in Healthcare Webinar", date: "2023-07-15", type: "Webinar" },
-            { id: 2, title: "Blockchain Technology Workshop", date: "2023-07-22", type: "Workshop" },
-            { id: 3, title: "Data Science Challenge", date: "2023-08-01", type: "Challenge" },
+            { id: 1, title: "AI in Healthcare Webinar", date: "2025-01-15", type: "Webinar" },
+            { id: 2, title: "Blockchain Technology Workshop", date: "2025-01-22", type: "Workshop" },
+            { id: 3, title: "Data Science Challenge", date: "2025-08-01", type: "Challenge" },
           ].map((event) => (
             <Card key={event.id} className="glass-card">
               <CardHeader>
