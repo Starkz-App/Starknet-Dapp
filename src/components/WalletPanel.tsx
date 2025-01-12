@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Zap, Wallet, User, Settings, LogOut, Gift, FileText } from 'lucide-react'
+import { Zap, Wallet, User, Settings, LogOut, Gift, FileText, Gem, Shield, Coins, BrainCircuit, Brain } from 'lucide-react'
 
 interface WalletPanelProps {
   isConnected: boolean
@@ -23,9 +23,10 @@ const mockUser = {
 }
 
 const features = [
-  { icon: Zap, title: 'Fast Transactions', description: 'Lightning-quick blockchain transactions' },
-  { icon: Wallet, title: 'Secure Wallet', description: 'Your assets, protected by cutting-edge security' },
-  { icon: User, title: 'User-Friendly', description: 'Intuitive interface for seamless experience' },
+  { icon: Brain, title: 'Shared Knowledge', description: 'Decentralized public hub' },
+  { icon: Gem, title: 'Censorship Resistance', description: 'Decentralized and Immutable' },
+  { icon: Shield, title: 'Cryptographic Encryption', description: 'Protection by cutting-edge security' },
+  { icon: Coins, title: 'Earn Crypto', description: 'Your IP earn rewards and royalties' },
 ]
 
 export function WalletPanel({ isConnected, onConnect, onDisconnect }: WalletPanelProps) {
@@ -33,7 +34,7 @@ export function WalletPanel({ isConnected, onConnect, onDisconnect }: WalletPane
     return (
       <div className="space-y-4">
         <Button onClick={onConnect} className="w-full">Connect Wallet</Button>
-        <p className="text-sm text-muted-foreground text-center">New to blockchain? <a href="#" className="text-primary">Learn more</a></p>
+        <p className="text-sm text-muted-foreground text-center">New to Starknet? <a href="#" className="text-primary">Create your smart account</a></p>
         <div className="grid gap-4 mt-6">
           {features.map((feature, index) => (
             <Card key={index}>

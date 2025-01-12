@@ -111,9 +111,9 @@ export function BottomNav() {
         </SheetTrigger>
         <SheetContent className="overflow-y-auto">
           <SheetHeader>
-            <SheetTitle>{isConnected ? 'Wallet Connected' : 'Connect Wallet'}</SheetTitle>
+            <SheetTitle>{isConnected ? 'Account Connected' : 'Connect'}</SheetTitle>
             <SheetDescription>
-              {isConnected ? 'Manage your wallet and account' : 'Connect your blockchain wallet to access features'}
+              {isConnected ? 'Manage your wallet and account' : 'Connect your Starknet wallet to access'}
             </SheetDescription>
           </SheetHeader>
           <div className="mt-4">
