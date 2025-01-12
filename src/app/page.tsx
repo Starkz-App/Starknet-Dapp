@@ -76,7 +76,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[500px] rounded-lg overflow-hidden">
         <Image
-          src="/background.jpg"
+          src="/Starkz-from-ai-to-zk-banner-box.jpg"
           alt="Starkz"
           layout="fill"
           objectFit="cover"

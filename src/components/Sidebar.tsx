@@ -7,6 +7,7 @@ import { Home, PlusCircle, FileText, Users, Settings, Zap, Gift, Search, Trendin
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 const navItems = [
   { icon: Home, href: '/', label: 'Dashboard' },
@@ -27,7 +28,12 @@ export function Sidebar() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/">
-                <Zap className="h-6 w-6" />
+                <Image
+                          src="/Starkz-Symbol.svg"
+                          alt="Starkz"
+                          width={40}
+                          height={40}
+                        />
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">
