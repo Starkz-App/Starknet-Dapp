@@ -18,7 +18,7 @@ Dapp requirements:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/Starkz-App/Starknet.git
+git clone https://github.com/Starkz-App/Starknet-Dapp.git
 ```
 Install dependencies for Next.js 15 + React 19:
 

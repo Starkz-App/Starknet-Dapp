@@ -90,7 +90,7 @@ export default function CartPage() {
                     <h3 className="font-semibold">{item.name}</h3>
                     <p className="text-sm text-gray-600">By: {item.author}</p>
                     <p className="text-sm text-gray-600">Type: {item.type}</p>
-                    <p className="font-medium">{item.price} ETH</p>
+                    <p className="font-medium">{item.price} STRK</p>
                     <p className="text-sm text-gray-600">{item.priceInStarks} Starks</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -123,7 +123,7 @@ export default function CartPage() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>Subtotal:</span>
-                  <span>{total.toFixed(3)} ETH</span>
+                  <span>{total.toFixed(3)} STRK</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Subtotal (Starks):</span>
@@ -131,11 +131,11 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between">
                   <span>Fees:</span>
-                  <span>0.001 ETH</span>
+                  <span>0.001 STRK</span>
                 </div>
                 <div className="flex justify-between font-semibold">
                   <span>Total:</span>
-                  <span>{(total + 0.001).toFixed(3)} ETH</span>
+                  <span>{(total + 0.001).toFixed(3)} STRK</span>
                 </div>
                 <div className="flex justify-between text-sm text-gray-600">
                   <span>Total (Starks):</span>

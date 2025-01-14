@@ -49,7 +49,7 @@ export default function ProductPage() {
           />
           <div>
             <p className="text-lg mb-4">{product.description}</p>
-            <p className="font-semibold text-xl mb-2">Price: {product.price} ETH</p>
+            <p className="font-semibold text-xl mb-2">Price: {product.price} STRK</p>
             <p className="text-gray-600 mb-4">or {product.priceInStarks} Starks</p>
             <p className="text-gray-600 mb-4">By: {product.author}</p>
             <p className="text-gray-600 mb-4">Type: {product.type}</p>

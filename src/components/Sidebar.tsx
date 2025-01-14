@@ -37,7 +37,7 @@ export function Sidebar() {
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">
-              <p>Home</p>
+              <p>Start</p>
             </TooltipContent>
           </Tooltip>
         </div>

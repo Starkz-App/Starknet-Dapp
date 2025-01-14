@@ -42,7 +42,7 @@ const ProductCard = ({ product, onAddToCart, viewMode }: { product: Product; onA
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <div>
-          <span className="text-lg font-bold">{product.price} ETH</span>
+          <span className="text-lg font-bold">{product.price} STRK</span>
           <p className="text-sm text-muted-foreground">{product.priceInStarks} Starks</p>
         </div>
         <Button onClick={() => onAddToCart(product)}>
@@ -139,7 +139,7 @@ export default function StorePage() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-medium leading-none">Price Range (ETH)</h4>
+                  <h4 className="font-medium leading-none">Price Range (STRK)</h4>
                   <Slider
                     min={0}
                     max={100}
@@ -148,8 +148,8 @@ export default function StorePage() {
                     onValueChange={setPriceRange}
                   />
                   <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>{priceRange[0]} ETH</span>
-                    <span>{priceRange[1]} ETH</span>
+                    <span>{priceRange[0]} STRK</span>
+                    <span>{priceRange[1]} STRK</span>
                   </div>
                 </div>
               </div>

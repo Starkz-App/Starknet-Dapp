@@ -210,7 +210,7 @@ export default function Home() {
               <CardContent className="flex-grow">
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-bold">{product.price} ETH</span>
+                  <span className="text-lg font-bold">{product.price} STRK</span>
                   <Button asChild>
                     <Link href={`/store/product/${product.id}`}>
                       <ShoppingCart className="mr-2 h-4 w-4" /> View Product
