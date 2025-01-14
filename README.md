@@ -37,4 +37,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### About Starkz
 
 Starkz dapp is under active development by Mediolano.
-Reach us: starkzapp@gmail.com || https://mediolano.app
+
+Reach us: starkzapp@gmail.com
+Discover more: https://mediolano.app
