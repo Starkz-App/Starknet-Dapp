@@ -113,6 +113,7 @@ export default function Home() {
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-4">Platform Overview</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          
           <Card className="bg-card text-card-foreground">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Articles</CardTitle>
@@ -123,16 +124,18 @@ export default function Home() {
               <p className="text-xs text-muted-foreground">+20.1% from last month</p>
             </CardContent>
           </Card>
+          
           <Card className="bg-card text-card-foreground">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Rewards Distributed</CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">${publications.reduce((sum, listing) => sum + listing.price, 0).toLocaleString()}</div>
+              <div className="text-2xl font-bold">42.5</div>
               <p className="text-xs text-muted-foreground">+10.5% from last month</p>
             </CardContent>
           </Card>
+          
           <Card className="bg-card text-card-foreground">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Active Users</CardTitle>

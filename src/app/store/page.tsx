@@ -30,7 +30,7 @@ const ProductCard = ({ product, onAddToCart, viewMode }: { product: Product; onA
     <div className={`flex flex-col ${viewMode === 'list' ? 'w-2/3' : 'w-full'}`}>
       <CardHeader>
         <CardTitle className="line-clamp-1">{product.name}</CardTitle>
-        <CardDescription>By {product.author}</CardDescription>
+        <CardDescription>@ {product.author}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="flex items-center mb-2">
@@ -43,7 +43,7 @@ const ProductCard = ({ product, onAddToCart, viewMode }: { product: Product; onA
       <CardFooter className="flex justify-between items-center">
         <div>
           <span className="text-lg font-bold">{product.price} STRK</span>
-          <p className="text-sm text-muted-foreground">{product.priceInStarks} Starks</p>
+          <p className="text-sm text-muted-foreground">+ {product.priceInStarks} Starks</p>
         </div>
         <Button onClick={() => onAddToCart(product)}>
           <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
@@ -97,11 +97,10 @@ export default function StorePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Digital Asset Marketplace
+         Gifts & Assets Store
       </motion.h1>
       
-      {/* Featured Collections */}
-      <FeaturedCollections />
+      
 
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0 md:space-x-4">
         <div className="w-full md:w-1/3 relative">
@@ -193,6 +192,13 @@ export default function StorePage() {
           </Button>
         </div>
       )}
+
+
+      {/* Featured Collections */}
+      <FeaturedCollections />
+
+
+
     </div>
   )
 }
