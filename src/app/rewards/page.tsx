@@ -18,16 +18,16 @@ export default function RewardsPage() {
       setClaimingRewards(false)
       toast({
         title: "Rewards Claimed!",
-        description: "Your rewards have been successfully added to your account.",
+        description: "Your Starkz rewards have been successfully added to your account.",
       })
     }, 2000)
   }
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Knowledge Sharing Rewards</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Starkz Rewards</h1>
       <p className="text-lg text-muted-foreground">
-        Earn rewards for your valuable contributions to our knowledge-sharing community.
+        Earn crypto rewards for your valuable contributions to our knowledge-sharing community.
       </p>
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
@@ -42,9 +42,9 @@ export default function RewardsPage() {
               <CardDescription>Your current reward balance and progress</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-4xl font-bold">1,250 <span className="text-xl text-muted-foreground">STZ</span></div>
+              <div className="text-4xl font-bold">1,250 <span className="text-xl text-muted-foreground">STRZ</span></div>
               <Progress value={65} className="mt-2" />
-              <p className="text-sm text-muted-foreground mt-2">65% to next level</p>
+              <p className="text-sm text-muted-foreground mt-2">65% this month</p>
               <Button className="mt-4" onClick={handleClaimRewards} disabled={claimingRewards}>
                 {claimingRewards ? "Claiming..." : "Claim Rewards"}
               </Button>
@@ -59,7 +59,7 @@ export default function RewardsPage() {
                 <BookOpen className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">350 STZ</div>
+                <div className="text-2xl font-bold">350 STRZ</div>
                 <p className="text-xs text-muted-foreground">
                   Earned from your articles
                 </p>
@@ -68,28 +68,28 @@ export default function RewardsPage() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Engagement
+                  Community Tips
                 </CardTitle>
                 <ThumbsUp className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">280 STZ</div>
+                <div className="text-2xl font-bold">180 STRZ</div>
                 <p className="text-xs text-muted-foreground">
-                  Earned from likes and comments
+                  Earned from likes and hearts
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Community Building
+                  Community Engagement
                 </CardTitle>
                 <Trophy className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">620 STZ</div>
+                <div className="text-2xl font-bold">620 STRZ</div>
                 <p className="text-xs text-muted-foreground">
-                  Earned from referrals and collaborations
+                  Earned from community and collaborations
                 </p>
               </CardContent>
             </Card>
@@ -114,7 +114,7 @@ export default function RewardsPage() {
                       <p className="font-medium">{item.action}</p>
                       <p className="text-sm text-muted-foreground">{item.date}</p>
                     </div>
-                    <div className="font-bold">+{item.points} STZ</div>
+                    <div className="font-bold">+{item.points} STRZ</div>
                   </div>
                 ))}
               </div>
@@ -141,7 +141,7 @@ export default function RewardsPage() {
                       <div className="font-bold w-6">{user.rank}</div>
                       <div>{user.name}</div>
                     </div>
-                    <div className="font-bold">{user.points} STZ</div>
+                    <div className="font-bold">{user.points} STRZ</div>
                   </div>
                 ))}
               </div>
