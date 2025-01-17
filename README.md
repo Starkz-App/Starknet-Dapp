@@ -1,5 +1,6 @@
 # Starkz: From AI to ZK
 
+
 Starkz – a decentralized public knowledge hub powered on Starknet to share and reward information -- a dynamic community dapp where users contribute and share information in a decentralized way. 
 
 Built on Starknet's high-speed, low-cost infrastructure, Starkz offers a seamless experience for all its users, ensuring that knowledge is not only accessible but also rewarded.
