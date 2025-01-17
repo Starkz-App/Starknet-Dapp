@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { Sidebar } from '@/components/Sidebar'
 import { Header } from '@/components/Header'
 import { BottomNav } from '@/components/BottomNav'
+import { StarknetProvider } from "@/components/starknet-provider";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <StarknetProvider>
           <AnimatedBackground />
           <div className="flex h-screen overflow-hidden">
             <Sidebar />
@@ -41,6 +43,7 @@ export default function RootLayout({
             </div>
           </div>
           <Toaster />
+          </StarknetProvider>
         </ThemeProvider>
       </body>
     </html>
