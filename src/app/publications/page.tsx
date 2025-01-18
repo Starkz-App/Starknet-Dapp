@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -15,61 +15,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, ThumbsUp, MessageSquare, Eye, Clock, Filter, Tag } from 'lucide-react'
-
-// Simplified mock data directly in component for reliability
-const mockPublications = [
-  {
-    id: '1',
-    title: 'Understanding zk-STARKs: A Comprehensive Guide',
-    description: 'An in-depth look at zk-STARKs and their applications in blockchain technology.',
-    author: {
-      name: 'Dr. Eli Ben-Sasson',
-      avatar: '/placeholder.svg?height=40&width=40'
-    },
-    category: 'Cryptography',
-    publishedAt: '2023-06-15T10:00:00Z',
-    likes: 120,
-    comments: 25,
-    views: 1500,
-    tags: ['zk-STARKs', 'Blockchain'],
-    readTime: '10 min'
-  },
-  {
-    id: '2',
-    title: 'Implementing Zero-Knowledge Proofs in Rust',
-    description: 'A practical guide to implementing ZKPs using the Rust programming language.',
-    author: {
-      name: 'Alice Johnson',
-      avatar: '/placeholder.svg?height=40&width=40'
-    },
-    category: 'Programming',
-    publishedAt: '2023-06-20T14:30:00Z',
-    likes: 95,
-    comments: 18,
-    views: 1200,
-    tags: ['Rust', 'ZKP'],
-    readTime: '15 min'
-  },
-  {
-    id: '3',
-    title: 'The Future of Privacy in Blockchain',
-    description: 'Exploring the role of advanced cryptographic techniques in blockchain privacy.',
-    author: {
-      name: 'Bob Smith',
-      avatar: '/placeholder.svg?height=40&width=40'
-    },
-    category: 'Blockchain',
-    publishedAt: '2023-06-25T09:15:00Z',
-    likes: 150,
-    comments: 30,
-    views: 2000,
-    tags: ['Privacy', 'Blockchain'],
-    readTime: '8 min'
-  }
-]
-
-const categories = ['All', 'Cryptography', 'Programming', 'Blockchain', 'Privacy']
-const allTags = Array.from(new Set(mockPublications.flatMap(pub => pub.tags)))
+import { publications, Publication, categories, allTags } from '@/lib/data'
+import { PostCard } from '@/components/PostCard'
 
 export default function PublicationsPage() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -78,22 +25,27 @@ export default function PublicationsPage() {
   const [readingTime, setReadingTime] = useState([0, 30]) // 0-30 minutes
   const [minLikes, setMinLikes] = useState(0)
   const [showVerifiedOnly, setShowVerifiedOnly] = useState(false)
+  const [filteredPublications, setFilteredPublications] = useState<Publication[]>(publications)
 
-  // Enhanced filtering logic
-  const filteredPublications = mockPublications.filter(pub => {
-    const matchesSearch = pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pub.description.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === 'All' || pub.category === selectedCategory
-    const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => pub.tags.includes(tag))
-    const matchesReadingTime = parseInt(pub.readTime) >= readingTime[0] && parseInt(pub.readTime) <= readingTime[1]
-    const matchesLikes = pub.likes >= minLikes
+  useEffect(() => {
+    const filtered = publications.filter(pub => {
+      const matchesSearch = pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        pub.description.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesCategory = selectedCategory === 'All' || pub.category === selectedCategory
+      const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => pub.tags.includes(tag))
+      const matchesReadingTime = parseInt(pub.readTime) >= readingTime[0] && parseInt(pub.readTime) <= readingTime[1]
+      const matchesLikes = pub.likes >= minLikes
+      const matchesVerified = !showVerifiedOnly || pub.author.verified
 
-    return matchesSearch && matchesCategory && matchesTags && matchesReadingTime && matchesLikes
-  })
+      return matchesSearch && matchesCategory && matchesTags && matchesReadingTime && matchesLikes && matchesVerified
+    })
+
+    setFilteredPublications(filtered)
+  }, [searchTerm, selectedCategory, selectedTags, readingTime, minLikes, showVerifiedOnly])
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Starkz Knowledge</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">Discover Knowledge</h1>
 
       {/* Search and Filter Controls */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
@@ -125,6 +77,7 @@ export default function PublicationsPage() {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="All">All Categories</SelectItem>
                     {categories.map(category => (
                       <SelectItem key={category} value={category}>{category}</SelectItem>
                     ))}
@@ -202,63 +155,7 @@ export default function PublicationsPage() {
       {/* Publications Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredPublications.map((publication) => (
-          <Card key={publication.id} className="flex flex-col">
-            <CardHeader>
-              <div className="flex items-center space-x-4 mb-4">
-                <Avatar>
-                  <AvatarImage src={publication.author.avatar} alt={publication.author.name} />
-                  <AvatarFallback>{publication.author.name[0]}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <CardTitle className="text-lg">{publication.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground">by {publication.author.name}</p>
-                </div>
-              </div>
-              {/* Feature Image */}
-              <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
-                <Image
-                  src={`/placeholder.svg?height=400&width=600&text=${encodeURIComponent(publication.category)}`}
-                  alt={publication.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform hover:scale-105"
-                />
-              </div>
-              <p className="text-sm text-muted-foreground">{publication.description}</p>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {publication.tags.map(tag => (
-                  <Badge key={tag} variant="secondary">
-                    <Tag className="mr-1 h-3 w-3" />
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <div className="flex items-center space-x-4">
-                  <span className="flex items-center">
-                    <ThumbsUp className="mr-1 h-4 w-4" /> {publication.likes}
-                  </span>
-                  <span className="flex items-center">
-                    <MessageSquare className="mr-1 h-4 w-4" /> {publication.comments}
-                  </span>
-                  <span className="flex items-center">
-                    <Eye className="mr-1 h-4 w-4" /> {publication.views}
-                  </span>
-                </div>
-                <span className="flex items-center">
-                  <Clock className="mr-1 h-4 w-4" />
-                  {publication.readTime}
-                </span>
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button asChild className="w-full">
-                <Link href={`/publications/${publication.id}`}>Read More</Link>
-              </Button>
-            </CardFooter>
-          </Card>
+          <PostCard key={publication.id} post={publication} />
         ))}
       </div>
 
