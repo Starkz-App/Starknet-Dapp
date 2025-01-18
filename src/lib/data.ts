@@ -112,8 +112,8 @@ export function getPublicationById(id: string): Publication | undefined {
 export function getCommentsByPublicationId(publicationId: string): Comment[] {
   // This is a mock function. In a real application, you would fetch comments from a database.
   return [
-    { id: '1', author: 'Inna', content: 'Great article!', createdAt: '2025-01-26T10:00:00Z' },
-    { id: '2', author: 'Henri', content: 'Very informative, thanks!', createdAt: '2025-01-26T11:30:00Z' },
+    { id: '1', author: 'Robert', content: 'Great article!', createdAt: '2025-01-26T10:00:00Z' },
+    { id: '2', author: 'David', content: 'Very informative, thanks!', createdAt: '2025-01-26T11:30:00Z' },
   ];
 }
 
