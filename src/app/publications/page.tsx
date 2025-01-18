@@ -93,7 +93,7 @@ export default function PublicationsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Discover Knowledge</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">Starkz Knowledge</h1>
 
       {/* Search and Filter Controls */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">

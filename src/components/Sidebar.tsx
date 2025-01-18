@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, PlusCircle, FileText, Users, Settings, Zap, Gift, Search, TrendingUp, Briefcase, ShoppingBag } from 'lucide-react'
+import { Home, PlusCircle, FileText, Users, Settings, Zap, Gift, Search, TrendingUp, Briefcase, ShoppingBag, Newspaper } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
@@ -11,8 +11,8 @@ import Image from 'next/image'
 
 const navItems = [
   { icon: Home, href: '/', label: 'Dashboard' },
-  { icon: PlusCircle, href: '/new', label: 'New' },
-  { icon: Search, href: '/explore', label: 'Explore' },
+  { icon: PlusCircle, href: '/new', label: 'New Content' },
+  { icon: Newspaper, href: '/publications', label: 'Publications' },
   { icon: TrendingUp, href: '/popular', label: 'Popular' },
   { icon: Users, href: '/profile', label: 'Profile' },
   { icon: Gift, href: '/rewards', label: 'Rewards' },

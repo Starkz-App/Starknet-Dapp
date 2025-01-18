@@ -264,49 +264,7 @@ export default function Home() {
 
 
 
-
-
-
-
-
-
-
-      {/* Featured Collections Section */}
-      <section className="py-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Featured Topics</h2>
-          <Button variant="ghost" asChild>
-            <Link href="/collections">View All <ArrowUpRight className="ml-1 h-4 w-4" /></Link>
-          </Button>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {featuredCollections.map((collection) => (
-            <Card className='bg-background/60' key={collection.id}>
-              <CardHeader>
-                <CardTitle>{collection.title}</CardTitle>
-                <CardDescription>{collection.articlesCount} publications</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{collection.title} description.</p>
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  
-                  <span>{collection.followers} followers</span>
-
-                  <Button variant="ghost" size="sm">
-                    <Bookmark className="mr-1 h-4 w-4" /> Share
-                  </Button>
-                </div>
-              </CardContent>
-              <CardContent>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href={`/collections/${collection.id}`}>View</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
+        
 
 
 
@@ -366,53 +324,6 @@ export default function Home() {
 
 
 
-
-      {/* Rewards Section */}
-      <section className="py-20">
-        <div className="container mx-auto">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Earn Rewards</h2>
-            <Button variant="secondary" asChild>
-              <Link href="/rewards">View All Rewards</Link>
-            </Button>
-          </div>
-          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="bg-background/60">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Gift className="mr-2 h-5 w-5" /> Content Creation
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">Earn rewards for publishing high-quality articles and tutorials.</p>
-                <Badge variant="secondary">Up to 500 STZ per article</Badge>
-              </CardContent>
-            </Card>
-            <Card className="bg-background/60">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <ThumbsUp className="mr-2 h-5 w-5" /> Engagement
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">Get rewarded for liking, commenting, and sharing valuable content.</p>
-                <Badge variant="secondary">1-10 STZ per interaction</Badge>
-              </CardContent>
-            </Card>
-            <Card className="bg-background/60">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Users className="mr-2 h-5 w-5" /> Referrals
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">Invite friends and earn rewards when they join and contribute.</p>
-                <Badge variant="secondary">100 STZ per active referral</Badge>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
 
 
 
@@ -475,30 +386,6 @@ export default function Home() {
 
 
 
-
-
-
-
-
-
-      {/* Featured Content Creator Section */}
-      <section className="py-8">
-        <h2 className="text-2xl font-bold mb-4">Featured Content Creator</h2>
-        <Card className="flex flex-col md:flex-row items-center p-6 glass-card">
-          <Avatar className="h-24 w-24 md:h-32 md:w-32 mb-4 md:mb-0 md:mr-6">
-            <AvatarImage src="https://github.com/shadcn.png" alt="Featured Creator" />
-            <AvatarFallback>FC</AvatarFallback>
-          </Avatar>
-          <div className="flex-grow">
-            <h3 className="text-xl font-semibold mb-2">John Doe</h3>
-            <p className="text-muted-foreground mb-4">Blockchain Expert | 500+ Articles | 10k+ Followers</p>
-            <p className="mb-4">John is a leading voice in blockchain technology, known for his insightful articles and innovative research.</p>
-            <Button asChild>
-              <Link href="/profile/johndoe">View Profile</Link>
-            </Button>
-          </div>
-        </Card>
-      </section>
 
 
 
@@ -624,6 +511,63 @@ export default function Home() {
 
 
 
+{/* Rewards Section */}
+<section className="py-20">
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold">Earn Rewards</h2>
+            <Button variant="secondary" asChild>
+              <Link href="/rewards">View All Rewards</Link>
+            </Button>
+          </div>
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+            <Card className="bg-background/60">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Gift className="mr-2 h-5 w-5" /> Content Creation
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-4">Earn rewards for publishing high-quality articles and tutorials.</p>
+                <Badge variant="secondary">Up to 500 STZ per article</Badge>
+              </CardContent>
+            </Card>
+            <Card className="bg-background/60">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <ThumbsUp className="mr-2 h-5 w-5" /> Engagement
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-4">Get rewarded for liking, commenting, and sharing valuable content.</p>
+                <Badge variant="secondary">1-10 STZ per interaction</Badge>
+              </CardContent>
+            </Card>
+            <Card className="bg-background/60">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Users className="mr-2 h-5 w-5" /> Referrals
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-4">Invite friends and earn rewards when they join and contribute.</p>
+                <Badge variant="secondary">100 STZ per active referral</Badge>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
 
 
       {/* Discover Tabs Section */}
@@ -671,86 +615,7 @@ export default function Home() {
 
 
 
-
-
-
-
-
-      {/* Latest News Section */}
-      <section className="py-8">
-        <h2 className="text-2xl font-bold mb-4">Starkz Updates</h2>
-        <div className="space-y-4">
-          <Card className='glass-card'>
-            <CardHeader>
-              <CardTitle>New Tipping Feature</CardTitle>
-              <CardDescription>2 days ago</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>We've introduced a new tipping feature using Starks tokens. Now you can easily reward your favorite content creators!</p>
-            </CardContent>
-          </Card>
-          <Card className='glass-card'>
-            <CardHeader>
-              <CardTitle>Enhanced Search Functionality</CardTitle>
-              <CardDescription>1 week ago</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Our search engine has been upgraded to provide more accurate and relevant results. Finding the content you need is now easier than ever!</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-
-
-
-
-
-
-      {/* Upcoming Section */}
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Upcoming Updates</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {[
-            { id: 1, title: "New mint feature", date: "2025-01-15", type: "Feature" },
-            { id: 2, title: "View page update", date: "2025-01-22", type: "Updates" },
-            { id: 3, title: "Airdrop to users", date: "2026-01-01", type: "Airdrop" },
-          ].map((event) => (
-            <Card key={event.id} className="glass-card">
-              <CardHeader>
-                <CardTitle>{event.title}</CardTitle>
-                <CardDescription>{new Date(event.date).toLocaleDateString()}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Badge>{event.type}</Badge>
-              </CardContent>
-              <CardContent>
-                <Button variant="outline" className="w-full">Register</Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-
-
-
-
-
-
-
-           {/* Newsletter Signup Section */}
-      <section className="bg-background/60 rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
-        <p className="mb-4">Subscribe to our newsletter for the latest articles, events, and rewards.</p>
-        <form className="flex gap-2">
-          <Input type="email" placeholder="Enter your email" className="flex-grow" />
-          <Button type="submit">Subscribe</Button>
-        </form>
-      </section>
-
-
-
+      
 
 
 
