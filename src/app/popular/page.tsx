@@ -9,8 +9,39 @@ import { exploreMockData, ExploreItem } from '@/lib/explore-mock-data'
 import Link from 'next/link'
 import { ThumbsUp, Eye, Clock, Tag, FileText, Video, Book, ImageIcon, Heart } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import { useReadContract, useContract, useAccount, useSendTransaction} from "@starknet-react/core";
+import { type Abi } from "starknet";
+import { abi } from '@/abi/abi';
 
 export default function PopularPostsPage() {
+  const { address } = useAccount();
+  //const { address: connectedAddress, isConnected, isConnecting } = useAccount();
+  const contractAddress = '0x015f1fda6449a17b42edfcf2cc2c7600562fc739c9c7c0007939f517197569c2';
+
+  const [tokenIds, setTokenIds] = useState<BigInt[]>([]);
+
+  const { contract } = useContract({ 
+    abi: abi as Abi, 
+    address: contractAddress as `0x${string}`, 
+  }); 
+
+  async function getContractBalance(): Promise<BigInt | undefined>{
+    try{
+      const counter: BigInt = await contract.count();
+      return counter; //acho que eh isso mas tem que testar
+    }
+    catch(e) {
+      console.log(e);
+    }
+  }
+
+  const totalBalance = getContractBalance();
+  console.log(totalBalance)
+  
+  //const menosUm = totalBalance - 1;
+  //const TotalBalance = myTotalBalance ? BigInt(menosUm.toString()) : 0n;
+  //console.log(TotalBalance);
+
   const [sortBy, setSortBy] = useState('hearts')
   const [timeFrame, setTimeFrame] = useState('all')
 

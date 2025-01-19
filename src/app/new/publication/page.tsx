@@ -9,6 +9,9 @@ import { Textarea } from '@/components/ui/textarea'
 import { Checkbox } from "@/components/ui/checkbox"
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useReadContract, useContract, useAccount, useSendTransaction} from "@starknet-react/core";
+import { type Abi } from "starknet";
+import { abi } from '@/abi/abi';
 
 // Mock data for collections
 const mockCollections = [
@@ -35,6 +38,13 @@ export interface Publication {
 }
 
 export default function NewPublicationPage() {
+  const { address } = useAccount();
+  const contractAddress = '0x015f1fda6449a17b42edfcf2cc2c7600562fc739c9c7c0007939f517197569c2';
+  const { contract } = useContract({ 
+    abi: abi as Abi, 
+    address: contractAddress as `0x${string}`, 
+  }); 
+
   const [publication, setPublication] = useState<Publication>({
     title: '',
     content: '',
@@ -64,6 +74,23 @@ export default function NewPublicationPage() {
     }
   }
 
+  const { send, error: mintError} = useSendTransaction({ 
+    calls: 
+      contract && address   
+        ? [contract.populate("publish", [address, ipfsHash])] 
+        : undefined, 
+  }); 
+
+  const handleMintItem = async () => {
+    try {
+      send();
+      console.log("publish sent")
+    }
+    catch(error){
+      console.error("publish error: ", mintError); 
+    }    
+  };
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -106,7 +133,8 @@ export default function NewPublicationPage() {
         
         setIpfsHash(baseUrl + data.ipfsHash);
         console.log(baseUrl + data.ipfsHash);
-        
+        handleMintItem();
+
       } catch (err) {
         console.error('An error occurred', err);
       }
