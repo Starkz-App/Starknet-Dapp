@@ -25,7 +25,7 @@ const categories = [
   "Education", "Environment", "Sports", "Food", "Travel"
 ]
 
-interface Publication {
+export interface Publication {
   title: string;
   content: string;
   excerpt: string;
@@ -46,7 +46,8 @@ export default function NewPublicationPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submissionResult, setSubmissionResult] = useState<{ success: boolean; message: string } | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
+  const [ipfsHash, setIpfsHash] = useState("")
+  const baseUrl = "https://ipfs.io/ipfs/"
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPublication({ ...publication, [e.target.name]: e.target.value })
   }
@@ -70,7 +71,45 @@ export default function NewPublicationPage() {
     try {
       // Simulating an API call
       await new Promise(resolve => setTimeout(resolve, 1500))
+      console.log(publication);
+      console.log(publication.categories);
 
+      const submitData = new FormData();
+
+      submitData.append('title', publication.title);
+      submitData.append('content', publication.content);
+      submitData.append('excerpt', publication.excerpt);
+      submitData.append('collection', publication.collection);
+
+      publication.categories.forEach((category: string) => {
+        submitData.append('categories', category);
+      });
+
+      for (let pair of submitData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
+
+      try {
+        const response = await fetch('/api/forms-ipfs', {
+          method: 'POST',
+          body: submitData,
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to submit IP')
+        }
+        console.log('IP submitted successfully');
+        console.log(response.body);
+        console.log("POST done, waiting for response");
+        const data = await response.json();
+        
+        
+        setIpfsHash(baseUrl + data.ipfsHash);
+        console.log(baseUrl + data.ipfsHash);
+        
+      } catch (err) {
+        console.error('An error occurred', err);
+      }
       // Simulating a successful submission
       setSubmissionResult({
         success: true,
