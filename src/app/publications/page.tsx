@@ -18,7 +18,13 @@ import { Search, ThumbsUp, MessageSquare, Eye, Clock, Filter, Tag } from 'lucide
 import { publications, Publication, categories, allTags } from '@/lib/data'
 import { PostCard } from '@/components/PostCard'
 
+
+
+
+
 export default function PublicationsPage() {
+
+
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -26,6 +32,7 @@ export default function PublicationsPage() {
   const [minLikes, setMinLikes] = useState(0)
   const [showVerifiedOnly, setShowVerifiedOnly] = useState(false)
   const [filteredPublications, setFilteredPublications] = useState<Publication[]>(publications)
+
 
   useEffect(() => {
     const filtered = publications.filter(pub => {
@@ -40,12 +47,23 @@ export default function PublicationsPage() {
       return matchesSearch && matchesCategory && matchesTags && matchesReadingTime && matchesLikes && matchesVerified
     })
 
+
     setFilteredPublications(filtered)
   }, [searchTerm, selectedCategory, selectedTags, readingTime, minLikes, showVerifiedOnly])
 
+
+
+
   return (
+
+    <>
+
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Discover Knowledge</h1>
+      <h1 className="text-3xl font-bold text-center">Starkz</h1> 
+      <h3 className="text-2xl mb-8 text-center">Discover Knowledge</h3> 
+      
+
+
 
       {/* Search and Filter Controls */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
@@ -165,6 +183,9 @@ export default function PublicationsPage() {
         </div>
       )}
     </div>
+
+
+    </>
   )
 }
 

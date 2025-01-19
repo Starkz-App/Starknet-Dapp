@@ -11,7 +11,7 @@ export interface Publication {
   content: string;
   author: Author;
   publishedAt: string;
-  readTime: string;
+  format: string;
   likes: number;
   hearts: number;
   starkz: number;
@@ -22,26 +22,28 @@ export interface Publication {
   category: string;
   description: string;
   price: number;
+  media: string;
+  readTime: string;
 }
 
 export const authors: Author[] = [
   {
     id: '1',
-    name: 'Dr. Eli Ben-Sasson',
+    name: 'Eli',
     avatar: 'https://github.com/shadcn.png',
-    bio: 'Cryptography expert and co-founder of StarkWare',
+    bio: 'Cryptography expert',
   },
   {
     id: '2',
-    name: 'Alice Johnson',
+    name: 'Alice',
     avatar: 'https://github.com/shadcn.png',
-    bio: 'Blockchain researcher and enthusiast',
+    bio: 'Blockchain researcher',
   },
   {
     id: '3',
-    name: 'Bob Smith',
+    name: 'Pedro',
     avatar: 'https://github.com/shadcn.png',
-    bio: 'Senior software engineer specializing in zero-knowledge proofs',
+    bio: 'Full-stack developer',
   },
 ];
 
@@ -52,17 +54,19 @@ export const publications: Publication[] = [
     content: 'Content for zk-STARKs article...',
     author: authors[0],
     publishedAt: '2025-01-15T10:00:00Z',
-    readTime: '10 min read',
+    format: '10 min read',
     likes: 120,
     hearts: 50,
     starkz: 30,
     crowns: 5,
-    views: 1500,
+    views: 150,
     comments: 25,
     tags: ['zk-STARKs', 'Zero-Knowledge Proofs', 'Blockchain'],
     category: 'Cryptography',
     description: 'An in-depth look at zk-STARKs and their applications in blockchain technology.',
     price: 0.1,
+    media: '/background.jpg',
+    readTime: '2 min read',
   },
   {
     id: '2',
@@ -70,17 +74,19 @@ export const publications: Publication[] = [
     content: 'Content for ZKP in Rust article...',
     author: authors[1],
     publishedAt: '2025-01-20T14:30:00Z',
-    readTime: '8 min read',
+    format: '8 min read',
     likes: 95,
     hearts: 40,
     starkz: 20,
     crowns: 3,
-    views: 1200,
+    views: 120,
     comments: 18,
     tags: ['Rust', 'Zero-Knowledge Proofs', 'Cryptography'],
     category: 'Programming',
     description: 'A practical guide to implementing ZKPs using the Rust programming language.',
     price: 0.05,
+    media: '/background.jpg',
+    readTime: '2 min read',
   },
   {
     id: '3',
@@ -88,17 +94,19 @@ export const publications: Publication[] = [
     content: 'Content for future of privacy article...',
     author: authors[2],
     publishedAt: '2025-01-25T09:15:00Z',
-    readTime: '12 min read',
+    format: '12 min read',
     likes: 150,
     hearts: 70,
     starkz: 40,
     crowns: 8,
-    views: 2000,
+    views: 20,
     comments: 30,
     tags: ['Blockchain', 'Privacy', 'zk-STARKs', 'Cryptography'],
     category: 'Blockchain',
     description: 'Exploring the role of zk-STARKs and other advanced cryptographic techniques in shaping the future of privacy in blockchain systems.',
     price: 0.15,
+    media: '/background.jpg',
+    readTime: '2 min read',
   },
 ];
 
