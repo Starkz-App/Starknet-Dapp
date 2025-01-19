@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { products, Product } from '@/lib/store-mock-data'
 import { publications } from '@/lib/data'
-import { ArrowUpRight, TrendingUp, Users, DollarSign, BookOpen, Award, ThumbsUp, MessageSquare, Eye, Tag, Bookmark, Gift, ShoppingCart, PlusCircle, ChevronRight, Zap, GiftIcon, Users2 } from 'lucide-react'
+import { ArrowUpRight, TrendingUp, Users, DollarSign, BookOpen, Award, ThumbsUp, MessageSquare, Eye, Tag, Bookmark, Gift, ShoppingCart, PlusCircle, ChevronRight, Zap, GiftIcon, Users2, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -29,10 +29,10 @@ const featuredCollections = [
 
 // Mock data for recent store activity
 const recentStoreActivity = [
-  { id: '1', user: 'Eli', action: 'purchased', product: 'Cosmic Voyage NFT', timestamp: '2 minutes ago' },
-  { id: '2', user: 'Pedro', action: 'added to cart', product: 'Advanced ML Techniques', timestamp: '15 minutes ago' },
-  { id: '3', user: 'Robert', action: 'reviewed', product: 'Blockchain Fundamentals Course', timestamp: '1 hour ago' },
-  { id: '4', user: 'David', action: 'purchased', product: 'Quantum Computing Simulator', timestamp: '3 hours ago' },
+  { id: '1', user: 'Sal', action: 'tipped', product: 'Programmable IP on the Integrity Web', timestamp: '20 minutes ago' },
+  { id: '2', user: 'Pedro', action: 'published', product: 'Starknet Foundry 101', timestamp: '55 minutes ago' },
+  { id: '3', user: 'Alex', action: 'gift a react to', product: 'Blockchain Fundamentals Course', timestamp: '1 hour ago' },
+  { id: '4', user: 'David', action: 'published', product: 'Quantum Computing Simulator', timestamp: '3 hours ago' },
 ]
 
 
@@ -208,7 +208,7 @@ export default function Home() {
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <ThumbsUp className="h-4 w-4" />
                   <span>{article.likes}</span>
-                  <Eye className="h-4 w-4 ml-2" />
+                  <Heart className="h-4 w-4 ml-2" />
                   <span>{article.views}</span>
                 </div>
                 <Button variant="ghost" size="sm" asChild>
@@ -277,12 +277,12 @@ export default function Home() {
 
 
 
-      {/* Recent Articles Section */}
+      {/* Recent Articles Section 
       <section>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Recent Articles</h2>
+          <h2 className="text-2xl font-bold">Recent Comments</h2>
           <Button variant="ghost" asChild>
-            <Link href="/publications">View All <ArrowUpRight className="ml-1 h-4 w-4" /></Link>
+            <Link href="/">View All <ArrowUpRight className="ml-1 h-4 w-4" /></Link>
           </Button>
         </div>
         <Card className="glass-card">
@@ -311,7 +311,7 @@ export default function Home() {
         </Card>
       </section>
 
-
+*/}
 
 
 
