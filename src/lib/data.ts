@@ -10,7 +10,7 @@ export interface Publication {
   title: string;
   content: string;
   author: Author;
-  publishedAt: string;
+  date: string;
   format: string;
   likes: number;
   hearts: number;
@@ -53,7 +53,7 @@ export const publications: Publication[] = [
     title: 'Understanding zk-STARKs: A Comprehensive Guide',
     content: 'Content for zk-STARKs article...',
     author: authors[0],
-    publishedAt: '2025-01-15T10:00:00Z',
+    date: '2025-01-15T10:00:00Z',
     format: '10 min read',
     likes: 120,
     hearts: 50,
@@ -65,7 +65,7 @@ export const publications: Publication[] = [
     category: 'Cryptography',
     description: 'An in-depth look at zk-STARKs and their applications in blockchain technology.',
     price: 0.1,
-    media: '/background.jpg',
+    media: '/post-AI-IP.png',
     readTime: '2 min read',
   },
   {
@@ -73,7 +73,7 @@ export const publications: Publication[] = [
     title: 'Implementing Zero-Knowledge Proofs in Rust',
     content: 'Content for ZKP in Rust article...',
     author: authors[1],
-    publishedAt: '2025-01-20T14:30:00Z',
+    date: '2025-01-20T14:30:00Z',
     format: '8 min read',
     likes: 95,
     hearts: 40,
@@ -93,7 +93,7 @@ export const publications: Publication[] = [
     title: 'The Future of Privacy in Blockchain: zk-STARKs and Beyond',
     content: 'Content for future of privacy article...',
     author: authors[2],
-    publishedAt: '2025-01-25T09:15:00Z',
+    date: '2025-01-25T09:15:00Z',
     format: '12 min read',
     likes: 150,
     hearts: 70,

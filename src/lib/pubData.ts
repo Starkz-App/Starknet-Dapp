@@ -53,7 +53,7 @@ export interface Author {
       hearts: 120,
       tags: ['zk-STARKs', 'Zero-Knowledge Proofs', 'Blockchain'],
       category: 'Cryptography',
-      media: '',
+      media: '/post-mediolano-protocol.png',
       description: 'Zero Knowledge Proofs: The Future of Privacy and Security in Finance, Healthcare, and Intellectual Property.',
     },
     {
@@ -67,7 +67,7 @@ export interface Author {
       hearts: 10,
       tags: ['AI', 'Blockchain', 'Intellectual Property'],
       category: 'Programming',
-      media: '',
+      media: '/post-AI-IP.png',
       description: 'The Crucial Role of Blockchain and Zero-Knowledge Proofs for Protecting Intellectual Property in the AI Era.',
     },
     {
@@ -81,7 +81,7 @@ export interface Author {
       hearts: 20,
       tags: ['Blockchain', 'IP', 'Tokenization', 'AI'],
       category: 'AI',
-      media: '',
+      media: 'post-new-economy.png',
       description: 'IP Tokenization: Empowering the New Economy at the Intersection of AI.',
     },
     {
@@ -95,7 +95,7 @@ export interface Author {
       hearts: 28,
       tags: ['Blockchain', 'IP', 'Tokenization', 'Integrity Web'],
       category: 'Blockchain',
-      media: '',
+      media: '/post-AI-IP.png',
       description: 'Programmable IP: Tokenizing Intelligence on the Integrity Web',
     },
   ];

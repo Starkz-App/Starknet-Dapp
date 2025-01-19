@@ -14,24 +14,42 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
+        
+        <CardTitle className="line-clamp-1">{post.title}</CardTitle>
+        
+        <CardDescription>
+          
         <div className="flex items-center space-x-2 mb-2">
-          <Avatar className="h-8 w-8">
+        
+          <Avatar className="h-4 w-4">
             <AvatarImage src={post.author.avatar} alt={post.author.name} />
             <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
           </Avatar>
-          <Link href={`/authors/${post.author.id}`} className="text-sm font-medium hover:underline">
-            {post.author.name}
+          <Link href={`/authors/${post.author.id}`} className="text-sm font-medium hover:underline pr-4">
+          {post.author.name}
           </Link>
+          {new Date(post.date).toLocaleDateString()}
         </div>
-        <CardTitle className="line-clamp-1">{post.title}</CardTitle>
-        <CardDescription>{new Date(post.date).toLocaleDateString()}</CardDescription>
+        </CardDescription>
+
       </CardHeader>
       <CardContent className="flex-grow">
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{post.description}</p>
+
+      <img src={post.media} alt={post.title} className="w-full h-auto mb-4" />
+
+      
+
         <div className="flex justify-between items-center mb-4">
           <Badge>{post.type}</Badge>
           <span className="font-bold">{post.format}</span>
         </div>
+
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{post.description}</p>
+        
+
+        
+
+
         <div className="flex flex-wrap gap-2 mb-4">
           {post.tags.map(tag => (
             <Badge key={tag} variant="secondary">
@@ -41,6 +59,10 @@ export function PostCard({ post }: PostCardProps) {
             </Badge>
           ))}
         </div>
+
+        
+
+
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <div className="flex items-center space-x-2 text-sm text-muted-foreground">
