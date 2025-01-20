@@ -38,13 +38,6 @@ const recentStoreActivity = [
 
 
 
-
-
-
-
-
-
-
 export default function Home() {
 
 
