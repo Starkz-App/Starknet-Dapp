@@ -103,7 +103,7 @@ export default function PublicationPage() {
 
         <div className="aspect-video relative rounded-lg overflow-hidden shadow-lg">
           <Image
-            src={`/background.jpg`}
+            src={publication.media}
             alt={publication.title}
             layout="fill"
             objectFit="cover"
