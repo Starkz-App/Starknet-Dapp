@@ -13,7 +13,6 @@ import { useReadContract, useContract, useAccount, useSendTransaction} from "@st
 import { type Abi } from "starknet";
 import { abi } from '@/abi/abi';
 
-// Mock data for collections
 const mockCollections = [
   { value: '1', label: 'Web Development' },
   { value: '2', label: 'Machine Learning' },
@@ -22,7 +21,6 @@ const mockCollections = [
   { value: '5', label: 'Artificial Intelligence' },
 ]
 
-// Mock data for categories
 const categories = [
   "Technology", "Healthcare", "Energy", "Finance", "Entertainment",
   "Education", "Environment", "Sports", "Food", "Travel"
@@ -31,7 +29,7 @@ const categories = [
 export interface Publication {
   title: string;
   content: string;
-  excerpt: string;
+  slug: string;
   collection: string;
   categories: string[];
   tags: string[];
@@ -39,7 +37,7 @@ export interface Publication {
 
 export default function NewPublicationPage() {
   const { address } = useAccount();
-  const contractAddress = '0x015f1fda6449a17b42edfcf2cc2c7600562fc739c9c7c0007939f517197569c2';
+  const contractAddress = '0x06141dc992e50fd6b0eba2c475058076c0c305b7cc689b53da6542af02982366';
   const { contract } = useContract({ 
     abi: abi as Abi, 
     address: contractAddress as `0x${string}`, 
@@ -48,7 +46,7 @@ export default function NewPublicationPage() {
   const [publication, setPublication] = useState<Publication>({
     title: '',
     content: '',
-    excerpt: '',
+    slug: '',
     collection: '',
     categories: [],
     tags: [],
@@ -73,11 +71,11 @@ export default function NewPublicationPage() {
       setPublication({ ...publication, categories: publication.categories.filter(c => c !== category) })
     }
   }
-
+  
   const { send, error: mintError} = useSendTransaction({ 
     calls: 
       contract && address   
-        ? [contract.populate("publish", [address, ipfsHash])] 
+        ? [contract.populate("publish", [address, publication.slug, ipfsHash])] 
         : undefined, 
   }); 
 
@@ -91,6 +89,7 @@ export default function NewPublicationPage() {
     }    
   };
   
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -105,7 +104,7 @@ export default function NewPublicationPage() {
 
       submitData.append('title', publication.title);
       submitData.append('content', publication.content);
-      submitData.append('excerpt', publication.excerpt);
+      submitData.append('slug', publication.slug);
       submitData.append('collection', publication.collection);
 
       publication.categories.forEach((category: string) => {
@@ -141,7 +140,7 @@ export default function NewPublicationPage() {
       // Simulating a successful submission
       setSubmissionResult({
         success: true,
-        message: "Your new publication has been successfully created.",
+        message: "Your new publication has been successfully created. Please Sign transaction",
       })
     } catch (error) {
       console.error('Submission error:', error);
@@ -187,11 +186,11 @@ export default function NewPublicationPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="excerpt">Excerpt</Label>
+              <Label htmlFor="slug">Slug</Label>
               <Textarea
-                id="excerpt"
-                name="excerpt"
-                value={publication.excerpt}
+                id="slug"
+                name="slug"
+                value={publication.slug}
                 onChange={handleInputChange}
                 rows={3}
                 required

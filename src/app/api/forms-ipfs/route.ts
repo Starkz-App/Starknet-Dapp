@@ -14,7 +14,7 @@ export async function POST(request: NextRequest){
 
       const title = data.get('title') as unknown as string;
       const content = data.get('content') as unknown as string;
-      const excerpt = data.get('excerpt');
+      const slug = data.get('slug');
       const collection = data.get('collection') as string;
       const categories = data.getAll('categories');
 
@@ -31,12 +31,12 @@ export async function POST(request: NextRequest){
       // const mockedUrl = await pinataClient.gateways.convert(uploadMockedData.IpfsHash);
       // console.log(mockedUrl);
 
-      // console.log('Received data:', { title, content, excerpt, collection, categories: categories?.name });
+      // console.log('Received data:', { title, content, slug, collection, categories: categories?.name });
 
       const userObject = {
         title,
         content,
-        excerpt,
+        slug,
         collection,
         categories
       };

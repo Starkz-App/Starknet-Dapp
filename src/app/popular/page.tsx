@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState,} from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -16,16 +16,17 @@ import { abi } from '@/abi/abi';
 export default function PopularPostsPage() {
   const { address } = useAccount();
   //const { address: connectedAddress, isConnected, isConnecting } = useAccount();
-  const contractAddress = '0x015f1fda6449a17b42edfcf2cc2c7600562fc739c9c7c0007939f517197569c2';
+  const contractAddress = '0x06141dc992e50fd6b0eba2c475058076c0c305b7cc689b53da6542af02982366';
 
   const [tokenIds, setTokenIds] = useState<BigInt[]>([]);
-
+  const [tokenHashes, setTokenHashes] = useState<string[]>([]); // State for storing IPFS hashes
+  const [metadata, setMetadata] = useState<Record<string, any>>({}); // Initial empty JSON object
   const { contract } = useContract({ 
     abi: abi as Abi, 
     address: contractAddress as `0x${string}`, 
   }); 
 
-  async function getContractBalance(): Promise<BigInt | undefined>{
+  async function getContractBalance(){
     try{
       const counter: BigInt = await contract.count();
       return counter; //acho que eh isso mas tem que testar
@@ -35,9 +36,84 @@ export default function PopularPostsPage() {
     }
   }
 
-  const totalBalance = getContractBalance();
-  console.log(totalBalance)
+  async function getPublication(tokenIndex: number){
+    try {
+      const ipfsHash = await contract.get_publication(tokenIndex);
+      return ipfsHash;
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
+
+
+  const { data: ipfs, error: ipfsError } = useReadContract({
+    abi: abi as Abi,
+    functionName: 'get_publication',
+    address: contractAddress as `0x${string}`,
+    args: [2],
+    watch: false,   
+  });
+  console.log("teste do ipfs ", ipfs);  
+
+  async function fetchMetadata() {
+    try {
+      const response = await fetch(ipfs);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const json = await response.json(); // Parse the response as JSON
+      return json;
+    } catch (e) {
+      console.error("Error fetching metadata:", e);
+    }
+  }
   
+  useEffect(() => {
+    const loadMetadata = async () => {
+      const metadata = await fetchMetadata();
+      if (metadata) {
+        console.log("Metadata JSON:", metadata); // Successfully fetched and parsed JSON
+        setMetadata(metadata);
+      } else {
+        console.warn("No metadata fetched.");
+      }
+    };
+  
+    loadMetadata(); // Call the async function
+  }, [ipfs]);
+
+  useEffect(() => {
+    const fetchPublications = async () => {
+      try {
+        const totalBalance = await getContractBalance();
+        if (totalBalance === undefined) {
+          console.error("Failed to fetch total balance.");
+          return;
+        }
+        
+        const teste = await getPublication(1);
+        console.log("ESSE E O TESTE", teste);
+        
+        console.log("Total Tokens Minted (BigInt):", totalBalance);
+        const totalTokens = Number(totalBalance);
+        console.log("Total Tokens Minted (Number):", totalTokens);
+        // Create an array of promises to fetch IPFS hashes for all token indices
+        const ipfsHashPromises = Array.from(
+          { length: totalTokens }, 
+          (_, tokenIndex) => getPublication(tokenIndex)
+        );
+        // Resolve all promises and filter out any undefined results
+        const resolvedHashes = await Promise.all(ipfsHashPromises);
+        console.log(resolvedHashes)
+      } catch (error) {
+        console.error("Error fetching IPFS hashes:", error);
+      }
+    };
+  
+    fetchPublications(); // Execute the async function
+  }, [address]);
+
   //const menosUm = totalBalance - 1;
   //const TotalBalance = myTotalBalance ? BigInt(menosUm.toString()) : 0n;
   //console.log(TotalBalance);
@@ -127,7 +203,6 @@ export default function PopularPostsPage() {
                 {getTypeIcon(listing.type)}
                 <span className='text-xl'>{listing.title}</span>
               </CardTitle>
-              <CardDescription>by {listing.author}</CardDescription>
             </CardHeader>
 
             <CardContent className="flex-grow">
