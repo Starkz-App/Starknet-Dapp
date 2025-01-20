@@ -14,16 +14,16 @@ import { type Abi } from "starknet";
 import { abi } from '@/abi/abi';
 
 const mockCollections = [
-  { value: '1', label: 'Web Development' },
-  { value: '2', label: 'Machine Learning' },
+  { value: '1', label: 'Technology' },
+  { value: '2', label: 'Culture' },
   { value: '3', label: 'Blockchain' },
-  { value: '4', label: 'Data Science' },
+  { value: '4', label: 'Zero-Knowledge' },
   { value: '5', label: 'Artificial Intelligence' },
 ]
 
 const categories = [
-  "Technology", "Healthcare", "Energy", "Finance", "Entertainment",
-  "Education", "Environment", "Sports", "Food", "Travel"
+  "Technology", "Culture", "Blockchain", "Finance", "Zero-Knowledge",
+  "Education", "Environment", "AI"
 ]
 
 export interface Publication {
@@ -33,6 +33,8 @@ export interface Publication {
   collection: string;
   categories: string[];
   tags: string[];
+  media: string;
+  author: string;
 }
 
 export default function NewPublicationPage() {
@@ -50,7 +52,10 @@ export default function NewPublicationPage() {
     collection: '',
     categories: [],
     tags: [],
+    media: '',
+    author: ''
   })
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submissionResult, setSubmissionResult] = useState<{ success: boolean; message: string } | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -140,7 +145,7 @@ export default function NewPublicationPage() {
       // Simulating a successful submission
       setSubmissionResult({
         success: true,
-        message: "Your new publication has been successfully created. Please Sign transaction",
+        message: "Your new publication has been successfully created. Please Sign transaction to complete!",
       })
     } catch (error) {
       console.error('Submission error:', error);
@@ -187,15 +192,39 @@ export default function NewPublicationPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="slug">Slug</Label>
-              <Textarea
+              <Input
                 id="slug"
                 name="slug"
                 value={publication.slug}
                 onChange={handleInputChange}
-                rows={3}
                 required
               />
             </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="media">Media URL</Label>
+              <Input
+                id="media"
+                name="media"
+                value={publication.media}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+
+            <div className="space-y-2">
+              <Label htmlFor="author">Author</Label>
+              <Input
+                id="author"
+                name="author"
+                value={publication.author}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+
             <div className="space-y-2">
               <Label htmlFor="collection">Collection</Label>
               <Select value={publication.collection} onValueChange={handleCollectionChange}>
