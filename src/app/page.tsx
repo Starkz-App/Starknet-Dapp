@@ -75,7 +75,7 @@ export default function Home() {
           objectFit="cover"
           className="absolute inset-0"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-6">
+        <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white p-6">
           <h1 className="text-3xl md:text-5xl font-bold mb-4 text-center">Starkz Knowledge Hub</h1>
           <p className="text-lg md:text-xl mb-8 text-center max-w-2xl">Discover, share, and earn rewards for your knowledge in a decentralized ecosystem</p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -175,7 +175,7 @@ export default function Home() {
             <Card key={article.id} className="flex flex-col">
               <div className="relative h-48">
                 <Image
-                  src={`/background.jpg`}
+                  src={article.media}
                   alt={article.title}
                   layout="fill"
                   objectFit="cover"
@@ -339,7 +339,7 @@ export default function Home() {
 
       {/* Top Contributors Section */}
       <section>
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-4 mt-16">
           <h2 className="text-2xl font-bold">Top Contributors</h2>
           <Button variant="ghost" asChild>
             <Link href="/contributors">View All <ArrowUpRight className="ml-1 h-4 w-4" /></Link>
@@ -347,7 +347,7 @@ export default function Home() {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {publications.slice(0, 5).map((publication, index) => (
-            <Card key={publication.id} className="glass-card">
+            <Card key={publication.id} className="bg-background/40">
               <CardContent className="flex items-center p-6">
                 <Avatar className="h-16 w-16 mr-4">
                   <AvatarImage src={publication.author.avatar} alt={publication.author.name} />
@@ -399,12 +399,12 @@ export default function Home() {
       {/* Recent Activity */}
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-4">Recent Activity</h2>
-        <Card>
+        <Card className='bg-background/40'>
           <CardContent className="p-0">
             <ul className="divide-y divide-border">
               {recentStoreActivity.map((activity) => (
                 <li key={activity.id} className="p-4 flex items-center">
-                  <Avatar className="h-10 w-10 mr-4">
+                  <Avatar className="h-6 w-6 mr-4">
                     <AvatarImage src={`https://avatar.vercel.sh/${activity.user}.png`} alt={activity.user} />
                     <AvatarFallback>{activity.user.charAt(0)}</AvatarFallback>
                   </Avatar>
@@ -436,7 +436,7 @@ export default function Home() {
 
       <section className="py-8">
           <div className='flex items-center'>
-            <Image src="/Starkz-from-ai-to-zk-banner-Dapp.jpg" alt="Starkz" width={2000} height={600} />
+            <Image className='round-lg' src="/Starkz-from-ai-to-zk-banner-Dapp.jpg" alt="Starkz" width={2000} height={600} />
           </div>
       </section>
 
