@@ -436,7 +436,7 @@ export default function Home() {
 
       <section className="py-8">
           <div className='flex items-center'>
-            <Image src="/background.jpg" alt="Starkz" width={2000} height={600} />
+            <Image src="/Starkz-from-ai-to-zk-banner-Dapp.jpg" alt="Starkz" width={2000} height={600} />
           </div>
       </section>
 

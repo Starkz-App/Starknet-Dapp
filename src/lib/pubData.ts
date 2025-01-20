@@ -54,7 +54,7 @@ export interface Author {
       tags: ['zk-STARKs', 'Zero-Knowledge Proofs', 'Blockchain'],
       category: 'Cryptography',
       media: '/post-mediolano-protocol.png',
-      description: 'Zero Knowledge Proofs: The Future of Privacy and Security in Finance, Healthcare, and Intellectual Property.',
+      description: 'Zero Knowledge Proofs: The Future of Privacy and Security in Finance, Healthcare, and IP.',
     },
     {
       id: '2',
