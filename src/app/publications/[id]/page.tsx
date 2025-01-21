@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Link from 'next/link'
-import { MessageCircle, Share2, ArrowLeft, Bookmark, ThumbsUp, Gift, Zap, Award, Clock, Eye } from 'lucide-react'
+import { MessageCircle, Share2, ArrowLeft, Bookmark, ThumbsUp, Gift, Zap, Award, Clock, Eye, Heart } from 'lucide-react'
 import Image from 'next/image'
 import { useToast } from "@/components/ui/use-toast"
 import { getPublicationById, getCommentsByPublicationId, Publication, Comment } from '@/lib/data'
@@ -91,13 +91,14 @@ export default function PublicationPage() {
           <div className="flex items-center text-sm text-muted-foreground space-x-4">
             <span className="flex items-center">
               <Clock className="mr-1 h-4 w-4" />
-              {new Date(publication.publishedAt).toLocaleDateString()}
+              {new Date(publication.date).toLocaleDateString()}
             </span>
             <span className="flex items-center">
-              <Eye className="mr-1 h-4 w-4" />
-              {publication.readTime} read
+              <Heart className="mr-1 h-4 w-4" />
+              {publication.hearts} 
             </span>
-            <span>{publication.views} hearts</span>
+            <span className="flex items-center">
+              <ThumbsUp className="mr-1 h-4 w-4" /> {publication.likes}</span>
           </div>
         </header>
 
@@ -139,22 +140,12 @@ export default function PublicationPage() {
 
         <Separator />
 
-        <div className="flex items-center text-sm text-muted-foreground space-x-4">
-            <span className="flex items-center">
-              <Clock className="mr-1 h-4 w-4" />
-              {new Date(publication.publishedAt).toLocaleDateString()}
-            </span>
-            <span className="flex items-center">
-              <Eye className="mr-1 h-4 w-4" />
-              {publication.readTime} read
-            </span>
-            <span>{publication.views} views</span>
-          </div>
+        
 
         
 
         <div className="flex items-center space-x-4 p-4 rounded-lg">
-          <Avatar className="h-16 w-16">
+          <Avatar className="h-10 w-10">
             <AvatarImage src={publication.author.avatar} alt={publication.author.name} />
             <AvatarFallback>{publication.author.name[0]}</AvatarFallback>
           </Avatar>

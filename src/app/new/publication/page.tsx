@@ -40,12 +40,14 @@ export interface Publication {
 }
 
 export default function NewPublicationPage() {
+
   const { address } = useAccount();
   const contractAddress = '0x06141dc992e50fd6b0eba2c475058076c0c305b7cc689b53da6542af02982366';
   const { contract } = useContract({ 
     abi: abi as Abi, 
     address: contractAddress as `0x${string}`, 
   }); 
+  console.log(address);
 
   const [publication, setPublication] = useState<Publication>({
     title: '',

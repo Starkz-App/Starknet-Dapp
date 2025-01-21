@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { products, Product } from '@/lib/store-mock-data'
-import { publications } from '@/lib/data'
+
 import { ArrowUpRight, TrendingUp, Users, DollarSign, BookOpen, Award, ThumbsUp, MessageSquare, Eye, Tag, Bookmark, Gift, ShoppingCart, PlusCircle, ChevronRight, Zap, GiftIcon, Users2, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -13,9 +12,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Link from 'next/link'
 import Image from 'next/image'
 
-
-
-
+import { products, Product } from '@/lib/store-mock-data'
+import { publications } from '@/lib/data'
 
 
 
@@ -135,7 +133,7 @@ export default function Home() {
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{(publications.reduce((sum, listing) => sum + listing.views, 0) / 10).toLocaleString()}</div>
+              <div className="text-2xl font-bold">{(publications.reduce((sum, listing) => sum + listing.likes, 0) / 10).toLocaleString()}</div>
               <p className="text-xs text-muted-foreground">+5.2% from last month</p>
             </CardContent>
           </Card>
@@ -187,7 +185,7 @@ export default function Home() {
                 <CardDescription>By {article.author.name}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow">
-                <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{article.description}</p>
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{article.excerpt}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {article.tags.slice(0, 3).map(tag => (
                     <Badge key={tag} variant="secondary">
@@ -202,7 +200,7 @@ export default function Home() {
                   <ThumbsUp className="h-4 w-4" />
                   <span>{article.likes}</span>
                   <Heart className="h-4 w-4 ml-2" />
-                  <span>{article.views}</span>
+                  <span>{article.likes}</span>
                 </div>
                 <Button variant="ghost" size="sm" asChild>
                   <Link href={`/publications/${article.id}`}>Read More</Link>
@@ -355,7 +353,7 @@ export default function Home() {
                 </Avatar>
                 <div>
                   <h3 className="font-semibold">{publication.author.name}</h3>
-                  <p className="text-sm text-muted-foreground">{publication.category} Expert</p>
+                  <p className="text-sm text-muted-foreground">{publication.categories} Expert</p>
                   <div className="flex items-center mt-2">
                     <Award className="h-4 w-4 mr-1 text-yellow-500" />
                     <span className="text-sm font-medium">Rank #{index + 1}</span>

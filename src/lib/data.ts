@@ -3,6 +3,7 @@ export interface Author {
   name: string;
   avatar: string;
   bio: string;
+  verified: boolean;
 }
 
 export interface Publication {
@@ -31,18 +32,21 @@ export const authors: Author[] = [
     name: 'Pedro',
     avatar: 'https://github.com/shadcn.png',
     bio: 'Cryptography expert',
+    verified: true,
   },
   {
     id: '2',
     name: 'Alice',
     avatar: 'https://github.com/shadcn.png',
     bio: 'Blockchain researcher',
+    verified: true,
   },
   {
     id: '3',
     name: 'Rodrigo',
     avatar: 'https://github.com/shadcn.png',
     bio: 'Full-stack developer',
+    verified: true,
   },
 ];
 
@@ -127,8 +131,8 @@ export function getPublicationById(id: string): Publication | undefined {
 export function getCommentsByPublicationId(publicationId: string): Comment[] {
   // This is a mock function. In a real application, you would fetch comments from a database.
   return [
-    { id: '1', author: 'Robert', content: 'Great article!', createdAt: '2025-01-26T10:00:00Z' },
-    { id: '2', author: 'David', content: 'Very informative, thanks!', createdAt: '2025-01-26T11:30:00Z' },
+    { id: '1', author: 'Robert', content: 'Great article!', createdAt: '2025-01-12T10:00:00Z' },
+    { id: '2', author: 'David', content: 'Very informative, thanks!', createdAt: '2025-01-16T11:30:00Z' },
   ];
 }
 

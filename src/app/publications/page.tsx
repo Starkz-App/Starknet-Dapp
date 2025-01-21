@@ -28,7 +28,7 @@ export default function PublicationsPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const [readingTime, setReadingTime] = useState([0, 30]) // 0-30 minutes
+  const [minHearts, setMinHearts] = useState(0)
   const [minLikes, setMinLikes] = useState(0)
   const [showVerifiedOnly, setShowVerifiedOnly] = useState(false)
   const [filteredPublications, setFilteredPublications] = useState<Publication[]>(publications)
@@ -37,19 +37,19 @@ export default function PublicationsPage() {
   useEffect(() => {
     const filtered = publications.filter(pub => {
       const matchesSearch = pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.description.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesCategory = selectedCategory === 'All' || pub.category === selectedCategory
+        pub.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesCategory = selectedCategory === 'All' || pub.categories === selectedCategory
       const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => pub.tags.includes(tag))
-      const matchesReadingTime = parseInt(pub.readTime) >= readingTime[0] && parseInt(pub.readTime) <= readingTime[1]
+      const matchesHearts = pub.hearts >= minHearts
       const matchesLikes = pub.likes >= minLikes
       const matchesVerified = !showVerifiedOnly || pub.author.verified
 
-      return matchesSearch && matchesCategory && matchesTags && matchesReadingTime && matchesLikes && matchesVerified
+      return matchesSearch && matchesCategory && matchesTags && matchesHearts && matchesLikes && matchesVerified
     })
 
 
     setFilteredPublications(filtered)
-  }, [searchTerm, selectedCategory, selectedTags, readingTime, minLikes, showVerifiedOnly])
+  }, [searchTerm, selectedCategory, selectedTags, minHearts, minLikes, showVerifiedOnly])
 
 
 
@@ -129,17 +129,16 @@ export default function PublicationsPage() {
               </div>
 
               <div className="space-y-2">
-                <Label>Reading Time (minutes)</Label>
+                <Label>Minimum Hearts</Label>
                 <Slider
                   min={0}
-                  max={30}
-                  step={5}
-                  value={readingTime}
-                  onValueChange={setReadingTime}
+                  max={200}
+                  step={10}
+                  value={[minHearts]}
+                  onValueChange={(value) => setMinHearts(value[0])}
                 />
-                <div className="flex justify-between text-xs text-muted-foreground">
-                  <span>{readingTime[0]} min</span>
-                  <span>{readingTime[1]} min</span>
+                <div className="text-xs text-muted-foreground">
+                  At least {minLikes} likes
                 </div>
               </div>
 
