@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import type React from "react"
 import { useState } from "react"
@@ -13,99 +13,51 @@ import { authors, categories, collections } from "@/lib/data"
 import { useToast } from "@/components/ui/use-toast"
 import { TagInput } from "@/components/TagInput"
 import { CheckboxMultiSelect } from "@/components/CheckboxMultiSelect"
-import { useReadContract, useContract, useAccount, useSendTransaction} from "@starknet-react/core";
-import { type Abi } from "starknet";
-import { abi } from '@/abi/abi';
-import { sub } from 'date-fns'
-import { cn } from "@/lib/utils"
-
 
 const fallbackAuthors = authors || []
 const fallbackCategories = categories || []
 const fallbackCollections = collections || []
 
-
-export interface Publication {
-  title: string;
-  content: string;
-  author: string;
-  date: string;
-  format: string;
-  tags: string[];
-  categories: string[];
-  excerpt: string;
-  media: string;
-  slug: string;
-  collection: string;
+interface Publication {
+  title: string
+  author: string
+  urlSlug: string
+  categories: string[]
+  tags: string[]
+  content: string
+  excerpt: string
+  collection: string
+  featuredMediaUrl: string
 }
 
 export default function NewPublicationPage() {
-  const { address } = useAccount();
-  const contractAddress = '0x06141dc992e50fd6b0eba2c475058076c0c305b7cc689b53da6542af02982366';
-  const { contract } = useContract({ 
-    abi: abi as Abi, 
-    address: contractAddress as `0x${string}`, 
-  }); 
-
   const [publication, setPublication] = useState<Publication>({
-    title: '',
-    content: '',
-    author: '',
-    date: '',
-    format: '',
-    slug: '',
-    collection: '',
+    title: "",
+    author: "",
+    urlSlug: "",
     categories: [],
-    excerpt: '',
     tags: [],
-    media: '',
+    content: "",
+    excerpt: "",
+    collection: "",
+    featuredMediaUrl: "",
   })
-
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submissionResult, setSubmissionResult] = useState<{ success: boolean; message: string } | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const [ipfsHash, setIpfsHash] = useState("")
-  const baseUrl = "https://ipfs.io/ipfs/"
-
   const { toast } = useToast()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setPublication({ ...publication, [e.target.name]: e.target.value })
-  }
-
-  const handleCollectionChange = (value: string) => {
-    setPublication({ ...publication, collection: value })
-  }
-
-  const handleCategoryChange = (category: string, checked: boolean) => {
-    if (checked) {
-      setPublication({ ...publication, categories: [...publication.categories, category] })
-    } else {
-      setPublication({ ...publication, categories: publication.categories.filter(c => c !== category) })
+    const { name, value } = e.target
+    setPublication((prev) => ({ ...prev, [name]: value }))
+    if (name === "title") {
+      setPublication((prev) => ({ ...prev, urlSlug: value.toLowerCase().replace(/\s+/g, "-") }))
     }
   }
 
   const handleSelectChange = (name: string, value: string) => {
     setPublication((prev) => ({ ...prev, [name]: value }))
   }
-  
-  const { send, error: mintError} = useSendTransaction({ 
-    calls: 
-      contract && address   
-        ? [contract.populate("publish", [address, publication.slug, ipfsHash])] 
-        : undefined, 
-  }); 
-
-  const handleMintItem = async () => {
-    try {
-      send();
-      console.log("Publication sent")
-    }
-    catch(error){
-      console.error("Publication error: ", mintError); 
-    }    
-  };
-  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -113,65 +65,27 @@ export default function NewPublicationPage() {
 
     try {
       // Simulating an API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      console.log(publication);
-      console.log(publication.categories);
-
-      const submitData = new FormData();
-
-      submitData.append('title', publication.title);
-      submitData.append('content', publication.content);
-      submitData.append('author', publication.author);
-      submitData.append('date', publication.date);
-      submitData.append('format', publication.format);
-      submitData.append('slug', publication.slug);
-      submitData.append('collection', publication.collection);
-      submitData.append('media', publication.media);
-      submitData.append('excerpt', publication.excerpt);
-
-      publication.categories.forEach((category: string) => {
-        submitData.append('categories', category);
-      });
-
-      for (let pair of submitData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-      }
-
-      try {
-        const response = await fetch('/api/forms-ipfs', {
-          method: 'POST',
-          body: submitData,
-        });
-  
-        if (!response.ok) {
-          throw new Error('Failed to submit Publication')
-        }
-        console.log('Publication submitted successfully');
-        console.log(response.body);
-        console.log("POST done, waiting for response");
-        const data = await response.json();
-        
-        
-        setIpfsHash(baseUrl + data.ipfsHash);
-        console.log(baseUrl + data.ipfsHash);
-        handleMintItem();
-
-      } catch (err) {
-        console.error('An error occurred', err);
-      }
-
-
+      await new Promise((resolve) => setTimeout(resolve, 1500))
 
       // Simulating a successful submission
       setSubmissionResult({
         success: true,
-        message: "Your new publication has been successfully created. Please Sign transaction to complete!",
+        message: "Your new publication has been successfully created.",
+      })
+      toast({
+        title: "Publication Created",
+        description: "Your new publication has been successfully submitted.",
       })
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error("Submission error:", error)
       setSubmissionResult({
         success: false,
-        message: "Failed to create publication. Please try again our contact our support channel.",
+        message: "Failed to create publication. Please try again.",
+      })
+      toast({
+        title: "Error",
+        description: "Failed to create publication. Please try again.",
+        variant: "destructive",
       })
     } finally {
       setIsSubmitting(false)
@@ -179,12 +93,9 @@ export default function NewPublicationPage() {
     }
   }
 
-
-
-
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Publish New Publication</h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">Create New Publication</h1>
       <Card>
         <CardHeader>
           <CardTitle>Publication Details</CardTitle>
@@ -192,9 +103,7 @@ export default function NewPublicationPage() {
         </CardHeader>
         <CardContent>
           
-          
-          
-<form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
               <Input id="title" name="title" value={publication.title} onChange={handleInputChange} required />
@@ -215,8 +124,8 @@ export default function NewPublicationPage() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="slug">URL Slug</Label>
-              <Input id="slug" name="slug" value={publication.slug} onChange={handleInputChange} required />
+              <Label htmlFor="urlSlug">URL Slug</Label>
+              <Input id="urlSlug" name="urlSlug" value={publication.urlSlug} onChange={handleInputChange} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="categories">Categories</Label>
@@ -273,11 +182,11 @@ export default function NewPublicationPage() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="media">Featured Media URL</Label>
+              <Label htmlFor="featuredMediaUrl">Featured Media URL</Label>
               <Input
-                id="media"
-                name="media"
-                value={publication.media}
+                id="featuredMediaUrl"
+                name="featuredMediaUrl"
+                value={publication.featuredMediaUrl}
                 onChange={handleInputChange}
                 placeholder="https://example.com/image.jpg"
               />
@@ -286,17 +195,14 @@ export default function NewPublicationPage() {
               {isSubmitting ? "Publishing..." : "Publish Publication"}
             </Button>
           </form>
-
-
-
-
+          
         </CardContent>
       </Card>
 
       <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>{submissionResult?.success ? 'Success!' : 'Error'}</DrawerTitle>
+            <DrawerTitle>{submissionResult?.success ? "Success!" : "Error"}</DrawerTitle>
             <DrawerDescription>{submissionResult?.message}</DrawerDescription>
           </DrawerHeader>
           <div className="p-4">

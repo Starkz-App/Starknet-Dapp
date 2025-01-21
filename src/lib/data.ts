@@ -16,14 +16,13 @@ export interface Publication {
   hearts: number;
   starkz: number;
   crowns: number;
-  views: number;
   comments: number;
   tags: string[];
-  category: string;
-  description: string;
-  price: number;
+  categories: string[];
+  excerpt: string;
   media: string;
-  readTime: string;
+  slug: string;
+  collection: string;
 }
 
 export const authors: Author[] = [
@@ -59,14 +58,13 @@ export const publications: Publication[] = [
     hearts: 50,
     starkz: 30,
     crowns: 5,
-    views: 150,
-    comments: 25,
+    comments: 2,
     tags: ['Blockchain', 'IP', 'Tokenization', 'AI'],
-    category: 'AI',
-    description: 'IP Tokenization: Empowering the New Economy at the Intersection of AI.',
-    price: 0.1,
+    categories: ['Blockchain'],
+    excerpt: 'IP Tokenization: Empowering the New Economy at the Intersection of AI.',
     media: '/post-AI-IP.png',
-    readTime: '2 min read',
+    slug: 'ip-tokenization-empowering-the-new-economy-at-the-intersection-of-ai',
+    collection: '1',
   },
   {
     id: '2',
@@ -74,19 +72,18 @@ export const publications: Publication[] = [
     content: 'IP Tokenization: Empowering the New Economy at the Intersection of AI',
     author: authors[1],
     date: '2025-01-20T14:30:00Z',
-    format: '8 min read',
+    format: 'Article',
     likes: 95,
     hearts: 40,
     starkz: 20,
     crowns: 3,
-    views: 120,
     comments: 18,
     tags: ['Blockchain', 'IP', 'Tokenization', 'AI'],
-      category: 'AI',
-    description: 'IP Tokenization: Empowering the New Economy at the Intersection of AI',
-    price: 0.05,
+    categories: ['Tokenization'],
+    excerpt: 'IP Tokenization: Empowering the New Economy at the Intersection of AI',
+    slug: 'ip-tokenization-empowering-the-new-economy-at-the-intersection-of-ai',
     media: '/post-new-economy.png',
-    readTime: '2 min read',
+    collection: '1',
   },
   {
     id: '3',
@@ -99,19 +96,29 @@ export const publications: Publication[] = [
     hearts: 70,
     starkz: 40,
     crowns: 8,
-    views: 20,
     comments: 30,
     tags: ['Blockchain', 'IP', 'Tokenization', 'Integrity Web'],
-      category: 'Blockchain',
-    description: 'Programmable IP: Tokenizing Intelligence on the Integrity Web.',
-    price: 0.15,
+    categories: ['Blockchain'],
+    excerpt: 'Programmable IP: Tokenizing Intelligence on the Integrity Web.',
     media: '/post-Programmable-IP.png',
-    readTime: '2 min read',
+    slug: 'programmable-ip-tokenizing-intelligence-on-the-integrity-web',
+    collection: '1',
   },
 ];
 
-export const categories = Array.from(new Set(publications.map(pub => pub.category)));
+//export const categories = Array.from(new Set(publications.map(pub => pub.categories)));
 export const allTags = Array.from(new Set(publications.flatMap(pub => pub.tags)));
+
+export const collections = [
+  "Cryptography",
+  "Blockchain",
+  "Rust Programming",
+  "Zero-Knowledge",
+  "Development",
+  "Decentralized Finance",
+  "Smart Contract",
+  "Starknet",
+]
 
 export function getPublicationById(id: string): Publication | undefined {
   return publications.find(pub => pub.id === id);
@@ -131,4 +138,23 @@ export interface Comment {
   content: string;
   createdAt: string;
 }
+
+
+
+
+export interface Category {
+  id: string
+  name: string
+}
+
+export const categories: Category[] = [
+  { id: "1", name: "Blockchain" },
+  { id: "2", name: "Artificial Intelligence" },
+  { id: "3", name: "Cryptography" },
+  { id: "4", name: "Data Science" },
+  { id: "5", name: "Web Development" },
+  { id: "6", name: "Machine Learning" },
+  { id: "7", name: "Cybersecurity" },
+  { id: "8", name: "Quantum Computing" },
+]
 

@@ -14,9 +14,18 @@ export async function POST(request: NextRequest){
 
       const title = data.get('title') as unknown as string;
       const content = data.get('content') as unknown as string;
+      const author = data.get('author') as unknown as string;
+      const date = data.get('date') as unknown as string;
+      const format = data.get('format') as unknown as string;
       const slug = data.get('slug');
       const collection = data.get('collection') as string;
       const categories = data.getAll('categories');
+      const tags = data.getAll('tags');
+
+
+      const media = data.get('media');
+      const excerpt = data.get('excerpt') as unknown as string;
+
 
       // const data2 = request.body;
       // console.log(data2);
@@ -36,9 +45,15 @@ export async function POST(request: NextRequest){
       const userObject = {
         title,
         content,
+        author,
+        date,
+        format,
         slug,
         collection,
-        categories
+        categories,
+        tags,
+        media,
+        excerpt
       };
 
       // console.log('Attempting to upload to Pinata:', userObject);
