@@ -279,7 +279,7 @@ export default function PublicationPage() {
           </div>
           <div className="flex justify-center mt-6">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="/signup">Connect, Publish and Start Earning</Link>
+              <Link href="/signup"></Link>
             </Button>
           </div>
         </section>

@@ -184,11 +184,11 @@ export default function NewPublicationPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Publish New Publication</h1>
+      <h1 className="text-3xl font-bold tracking-tight">New Publication</h1>
       <Card>
         <CardHeader>
-          <CardTitle>Publication Details</CardTitle>
-          <CardDescription>Enter the details of your new publication</CardDescription>
+          <CardTitle>Create immutable publication</CardTitle>
+          <CardDescription>Enter the details of your new Starkz content</CardDescription>
         </CardHeader>
         <CardContent>
           
@@ -283,7 +283,7 @@ export default function NewPublicationPage() {
               />
             </div>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Publishing..." : "Publish Publication"}
+              {isSubmitting ? "Publishing..." : "Mint Publication"}
             </Button>
           </form>
 

@@ -32,7 +32,7 @@ export default function NewContentPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">Create New Content</h1>
-      <Card>
+      <Card className='bg-background/60'>
         <CardHeader>
           <CardTitle>Select Content Type</CardTitle>
           <CardDescription>Choose the type of content you want to create</CardDescription>

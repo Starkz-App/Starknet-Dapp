@@ -75,7 +75,7 @@ export default function Home() {
           objectFit="cover"
           className="absolute inset-0"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white p-6">
+        <div className="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-center items-center text-white p-6">
           <h1 className="text-3xl md:text-5xl font-bold mb-4 text-center">Starkz Knowledge Hub</h1>
           <p className="text-lg md:text-xl mb-8 text-center max-w-2xl">Discover, share, and earn rewards for your knowledge in a decentralized ecosystem</p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -433,14 +433,13 @@ export default function Home() {
 
 
 
-
+              
       <section className="py-8">
           <div className='flex items-center'>
             <Image className='round-lg' src="/Starkz-from-ai-to-zk-banner-Dapp.jpg" alt="Starkz" width={2000} height={600} />
           </div>
       </section>
-
-
+      
 
 
 
