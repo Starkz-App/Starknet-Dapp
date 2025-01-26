@@ -545,7 +545,7 @@ export default function Home() {
 
 
 
-      {/* Discover Tabs Section */}
+      {/* Discover Tabs Section 
       <Card className="glass-card">
         <CardHeader>
           <CardTitle className="flex items-center">
@@ -556,14 +556,15 @@ export default function Home() {
         <CardContent>
           <Tabs defaultValue="create" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="learn">Learn</TabsTrigger>
+              <TabsTrigger value="learn">Discover</TabsTrigger>
               <TabsTrigger value="creage">Create</TabsTrigger>
               <TabsTrigger value="explore">Earn</TabsTrigger>
             </TabsList>
             <TabsContent value="learn">
               <div className="space-y-4 mt-4">
                 <Input placeholder="Learn about Starknet" />
-                <Button className="w-full">Start</Button>
+                <Button className="w-full">
+                  <Link href='/'>Explore</Link></Button>
               </div>
             </TabsContent>
             <TabsContent value="create">
@@ -581,7 +582,7 @@ export default function Home() {
           </Tabs>
         </CardContent>
       </Card>
-
+        */}
 
 
 
