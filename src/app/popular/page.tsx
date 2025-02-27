@@ -11,7 +11,7 @@ import { TrendingUp, Clock, Filter } from "lucide-react"
 import { publications, type Publication } from "@/lib/data"
 
 export default function PopularPostsPage() {
-  const [sortBy, setSortBy] = useState("views")
+  const [sortBy, setSortBy] = useState("starkz")
   const [timeFrame, setTimeFrame] = useState("all")
   const [displayCount, setDisplayCount] = useState(9)
 
@@ -20,17 +20,17 @@ export default function PopularPostsPage() {
     switch (timeFrame) {
       case "day":
         return items.filter((item) => {
-          const publishDate = new Date(item.publishedAt)
+          const publishDate = new Date(item.date)
           return (now.getTime() - publishDate.getTime()) / (1000 * 3600 * 24) <= 1
         })
       case "week":
         return items.filter((item) => {
-          const publishDate = new Date(item.publishedAt)
+          const publishDate = new Date(item.date)
           return (now.getTime() - publishDate.getTime()) / (1000 * 3600 * 24 * 7) <= 1
         })
       case "month":
         return items.filter((item) => {
-          const publishDate = new Date(item.publishedAt)
+          const publishDate = new Date(item.date)
           return (now.getTime() - publishDate.getTime()) / (1000 * 3600 * 24 * 30) <= 1
         })
       default:
@@ -39,7 +39,7 @@ export default function PopularPostsPage() {
   }
 
   const sortedPublications = filterByTimeFrame([...publications]).sort((a, b) => {
-    if (sortBy === "views") return b.views - a.views
+    if (sortBy === "starkz") return b.starkz - a.starkz
     if (sortBy === "likes") return b.likes - a.likes
     return 0
   })
@@ -56,8 +56,8 @@ export default function PopularPostsPage() {
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="views">Most Viewed</SelectItem>
-              <SelectItem value="likes">Most Liked</SelectItem>
+              <SelectItem value="starkz">Starkz</SelectItem>
+              <SelectItem value="likes">Likes</SelectItem>
             </SelectContent>
           </Select>
           <Select value={timeFrame} onValueChange={setTimeFrame}>
@@ -91,14 +91,14 @@ export default function PopularPostsPage() {
       <Card className="mt-12">
         <CardHeader>
           <CardTitle className="flex items-center">
-            <TrendingUp className="mr-2 h-5 w-5" /> Popular Categories
+            <TrendingUp className="mr-2 h-5 w-5" /> Explore
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
-            {Array.from(new Set(publications.map((p) => p.category))).map((category) => (
-              <Button key={category} variant="outline" size="sm">
-                {category}
+            {Array.from(new Set(publications.map((p) => p.categories))).map((categories) => (
+              <Button key={categories.join(",")} variant="outline" size="sm">
+                {categories}
               </Button>
             ))}
           </div>
@@ -108,7 +108,7 @@ export default function PopularPostsPage() {
       <Card className="mt-8">
         <CardHeader>
           <CardTitle className="flex items-center">
-            <Clock className="mr-2 h-5 w-5" /> Trending This Week
+            <Clock className="mr-2 h-5 w-5" /> Trending
           </CardTitle>
         </CardHeader>
         <CardContent>

@@ -82,28 +82,7 @@ export default function ProfilePage() {
           </form>
         </CardContent>
       </Card>
-      <Card className="glass-card">
-        <CardHeader>
-          <CardTitle>Account Security</CardTitle>
-          <CardDescription>Manage your account security settings</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h3 className="font-medium">Two-Factor Authentication</h3>
-              <p className="text-sm text-muted-foreground">Add an extra layer of security to your account</p>
-            </div>
-            <Button variant="outline">Enable</Button>
-          </div>
-          <div className="flex justify-between items-center">
-            <div>
-              <h3 className="font-medium">Change Password</h3>
-              <p className="text-sm text-muted-foreground">Update your account password</p>
-            </div>
-            <Button variant="outline">Update</Button>
-          </div>
-        </CardContent>
-      </Card>
+      
     </div>
   )
 }

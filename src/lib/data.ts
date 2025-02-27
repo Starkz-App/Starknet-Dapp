@@ -6,6 +6,7 @@ export interface Author {
   verified: boolean;
 }
 
+
 export interface Publication {
   id: string;
   title: string;

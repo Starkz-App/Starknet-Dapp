@@ -30,7 +30,7 @@ export default function SettingsPage() {
     console.log('Updated settings:', settings)
     toast({
       title: "Settings Saved",
-      description: "Your settings have been successfully updated.",
+      description: "Your settings have been successfully updated (demonstration)",
     })
   }
 
