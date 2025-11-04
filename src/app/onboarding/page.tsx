@@ -12,6 +12,7 @@ import { completeOnboarding } from "./_actions";
 export default function OnboardingComponent() {
   // Access the current user's data
   const { user } = useUser();
+  console.log("Onboarding user:", user);
   
   const router = useRouter();
   const { createWalletAsync, isLoading, isError } = useCreateWallet();
