@@ -16,6 +16,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import { ChipiProvider } from "@chipi-stack/nextjs";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -30,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
-      <ChipiProvider>
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!} signInFallbackRedirectUrl="/" signUpFallbackRedirectUrl="/" afterSignOutUrl="/">
+            <Providers>
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
@@ -41,7 +42,8 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-    </ChipiProvider>
-    </ClerkProvider>
+    </Providers>
+  </ClerkProvider>
+
   )
 }
