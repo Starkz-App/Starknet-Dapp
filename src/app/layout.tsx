@@ -37,7 +37,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <main className="min-h-screen overflow-x-hidden overflow-y-auto p-4 md:p-6 pb-24 md:pb-32">{children}</main>
           <FloatingNavbar />
-          <ChatBox />
           <Toaster />
         </ThemeProvider>
       </body>
