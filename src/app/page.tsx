@@ -30,16 +30,16 @@ import Image from "next/image"
 
 // Mock data for featured collections
 const featuredCollections = [
-  { id: "1", title: "Web Development Essentials", articlesCount: 15 },
+  { id: "1", title: "ZK Essentials", articlesCount: 15 },
   { id: "2", title: "Machine Learning Fundamentals", articlesCount: 12 },
   { id: "3", title: "Blockchain Technology", articlesCount: 10 },
-  { id: "4", title: "Data Science Techniques", articlesCount: 18 },
+  { id: "4", title: "Starknet Ecosystem", articlesCount: 18 },
 ]
 
 // Mock data for recent store activity
 const recentStoreActivity = [
-  { id: "1", user: "Alice", action: "purchased", product: "Cosmic Voyage NFT", timestamp: "2 minutes ago" },
-  { id: "2", user: "Bob", action: "added to cart", product: "Advanced ML Techniques", timestamp: "15 minutes ago" },
+  { id: "1", user: "Robert", action: "purchased", product: "Cosmic Voyage NFT", timestamp: "2 minutes ago" },
+  { id: "2", user: "June", action: "added to cart", product: "Advanced ML Techniques", timestamp: "15 minutes ago" },
   { id: "3", user: "Charlie", action: "reviewed", product: "Blockchain Fundamentals Course", timestamp: "1 hour ago" },
   { id: "4", user: "David", action: "purchased", product: "Quantum Computing Simulator", timestamp: "3 hours ago" },
 ]
