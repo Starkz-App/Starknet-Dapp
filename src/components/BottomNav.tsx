@@ -1,14 +1,12 @@
-"use client"
-
 import React from 'react'
 import { Search, LayoutDashboard, Bell, Wallet, User } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/src/components/ui/button'
 import { ThemeToggle } from './ThemeToggle'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Input } from '@/components/ui/input'
-import { mockNotifications } from '@/lib/mockNotifications'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Badge } from '@/components/ui/badge'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/src/components/ui/sheet'
+import { Input } from '@/src/components/ui/input'
+import { mockNotifications } from '@/src/lib/mockNotifications'
+import { ScrollArea } from '@/src/components/ui/scroll-area'
+import { Badge } from '@/src/components/ui/badge'
 import { WalletPanel } from './WalletPanel'
 
 // Mock user data
@@ -111,9 +109,9 @@ export function BottomNav() {
         </SheetTrigger>
         <SheetContent className="overflow-y-auto">
           <SheetHeader>
-            <SheetTitle>{isConnected ? 'Account Connected' : 'Connect'}</SheetTitle>
+            <SheetTitle>{isConnected ? 'Wallet Connected' : 'Connect Wallet'}</SheetTitle>
             <SheetDescription>
-              {isConnected ? 'Manage your wallet and account' : 'Connect your Starknet wallet to access'}
+              {isConnected ? 'Manage your wallet and account' : 'Connect your blockchain wallet to access features'}
             </SheetDescription>
           </SheetHeader>
           <div className="mt-4">
@@ -138,4 +136,3 @@ export function BottomNav() {
     }
   }
 `}</style>
-

@@ -1,25 +1,28 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
-import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
+import type React from "react"
+
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card"
+import { Button } from "@/src/components/ui/button"
+import { Input } from "@/src/components/ui/input"
+import { Label } from "@/src/components/ui/label"
+import { Textarea } from "@/src/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/src/components/ui/select"
+import { Switch } from "@/src/components/ui/switch"
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/src/components/ui/drawer"
 
 export default function NewCollectionPage() {
   const [collection, setCollection] = useState({
-    name: '',
-    description: '',
-    visibility: 'public',
+    name: "",
+    description: "",
+    visibility: "public",
     collaborative: false,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submissionResult, setSubmissionResult] = useState<{ success: boolean; message: string } | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [hasExistingCollections, setHasExistingCollections] = useState(true)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setCollection({ ...collection, [e.target.name]: e.target.value })
@@ -39,14 +42,16 @@ export default function NewCollectionPage() {
 
     try {
       // Simulating an API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      await new Promise((resolve) => setTimeout(resolve, 1500))
 
       // Simulating a successful submission
       setSubmissionResult({
         success: true,
         message: "Your new collection has been successfully created.",
       })
+      setHasExistingCollections(true)
     } catch (error) {
+      console.error("Submission error:", error)
       setSubmissionResult({
         success: false,
         message: "Failed to create collection. Please try again.",
@@ -59,6 +64,17 @@ export default function NewCollectionPage() {
 
   return (
     <div className="space-y-6">
+      {!hasExistingCollections && (
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>No Existing Collections</CardTitle>
+            <CardDescription>You don't have any collections yet. Create your first collection now!</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button onClick={() => setIsDrawerOpen(true)}>Create New Collection</Button>
+          </CardContent>
+        </Card>
+      )}
       <h1 className="text-3xl font-bold tracking-tight">Create New Collection</h1>
       <Card>
         <CardHeader>
@@ -69,13 +85,7 @@ export default function NewCollectionPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                name="name"
-                value={collection.name}
-                onChange={handleInputChange}
-                required
-              />
+              <Input id="name" name="name" value={collection.name} onChange={handleInputChange} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
@@ -108,7 +118,7 @@ export default function NewCollectionPage() {
               <Label htmlFor="collaborative">Collaborative Collection</Label>
             </div>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Creating...' : 'Create Collection'}
+              {isSubmitting ? "Creating..." : "Create Collection"}
             </Button>
           </form>
         </CardContent>
@@ -117,7 +127,7 @@ export default function NewCollectionPage() {
       <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>{submissionResult?.success ? 'Success!' : 'Error'}</DrawerTitle>
+            <DrawerTitle>{submissionResult?.success ? "Success!" : "Error"}</DrawerTitle>
             <DrawerDescription>{submissionResult?.message}</DrawerDescription>
           </DrawerHeader>
           <div className="p-4">
@@ -128,4 +138,3 @@ export default function NewCollectionPage() {
     </div>
   )
 }
-

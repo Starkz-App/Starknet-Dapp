@@ -1,8 +1,8 @@
 import * as React from "react"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import type { Category } from "@/lib/data"
+import { Checkbox } from "@/src/components/ui/checkbox"
+import { Label } from "@/src/components/ui/label"
+import { Badge } from "@/src/components/ui/badge"
+import type { Category } from "@/src/lib/data"
 
 interface CheckboxMultiSelectProps {
   options: Category[]
@@ -53,4 +53,3 @@ export function CheckboxMultiSelect({ options, selected, onChange }: CheckboxMul
     </div>
   )
 }
-

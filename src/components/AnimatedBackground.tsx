@@ -1,36 +1,7 @@
-'use client'
+"use client"
 
-import { useTheme } from 'next-themes'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-
-const GradientCircle = ({ colors, size }: { colors: string[]; size: number }) => (
-  <motion.div
-    className="absolute rounded-full"
-    style={{
-      width: size,
-      height: size,
-      background: `radial-gradient(circle, ${colors[0]} 0%, ${colors[1]} 100%)`,
-      opacity: 0.5,
-      filter: 'blur(80px)',
-    }}
-    initial={{
-      x: `${Math.random() * 140 - 20}%`,
-      y: `${Math.random() * 140 - 20}%`,
-      scale: Math.random() * 0.5 + 0.5,
-    }}
-    animate={{
-      x: `${Math.random() * 140 - 20}%`,
-      y: `${Math.random() * 140 - 20}%`,
-      scale: [Math.random() * 0.5 + 0.5, Math.random() * 0.7 + 0.3, Math.random() * 0.5 + 0.5],
-    }}
-    transition={{
-      duration: (Math.random() * 24 + 16) * 0.67,
-      repeat: Infinity,
-      repeatType: 'reverse',
-    }}
-  />
-)
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 export const AnimatedBackground = () => {
   const { theme, systemTheme } = useTheme()
@@ -40,25 +11,29 @@ export const AnimatedBackground = () => {
     setMounted(true)
   }, [])
 
-  const currentTheme = theme === 'system' ? systemTheme : theme
-
-  const gradients = [
-    ['rgba(0, 0, 255, 0.2)', 'rgba(0, 0, 255, 0.1)'],
-    ['rgba(236, 121, 107, 0.2)', 'rgba(236, 121, 107, 0.1)'],
-    ['rgba(225, 117, 177, 0.2)', 'rgba(225, 117, 177, 0.1)'],
-  ]
+  const currentTheme = theme === "system" ? systemTheme : theme
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
-      <div 
-        className={`absolute inset-0 transition-colors duration-500 ${
-          currentTheme === 'dark' ? 'bg-primary-900' : 'bg-primary-50'
-        }`} 
+      <div
+        className={`absolute inset-0 transition-colors duration-700 ${
+          currentTheme === "dark"
+            ? "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
+            : "bg-gradient-to-br from-slate-50 via-white to-blue-50"
+        }`}
       />
-      {mounted && Array.from({ length: 20 }).map((_, i) => (
-        <GradientCircle key={i} colors={gradients[i % gradients.length]} size={Math.random() * 600 + 300} />
-      ))}
+
+      {mounted && (
+        <>
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-400 to-cyan-300 dark:from-blue-600 dark:to-cyan-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl animate-float" />
+            <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-400 to-pink-300 dark:from-purple-600 dark:to-pink-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl animate-float-delayed" />
+            <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-gradient-to-br from-amber-400 to-orange-300 dark:from-amber-600 dark:to-orange-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl animate-float-slow" />
+          </div>
+
+          <div className="absolute inset-0 bg-dot-pattern opacity-[0.15] dark:opacity-[0.08]" />
+        </>
+      )}
     </div>
   )
 }
-

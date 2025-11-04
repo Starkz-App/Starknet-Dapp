@@ -1,15 +1,13 @@
-"use client"
-
 import React, { useState } from 'react'
 import { Bell, Search, Wallet, User, Info, CheckCircle, AlertTriangle, XCircle } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Input } from '@/src/components/ui/input'
+import { Button } from '@/src/components/ui/button'
 import { ThemeToggle } from './ThemeToggle'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { mockNotifications, Notification } from '@/lib/mockNotifications'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Badge } from '@/components/ui/badge'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/src/components/ui/sheet'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/src/components/ui/tooltip'
+import { mockNotifications, Notification } from '@/src/lib/mockNotifications'
+import { ScrollArea } from '@/src/components/ui/scroll-area'
+import { Badge } from '@/src/components/ui/badge'
 import { WalletPanel } from './WalletPanel'
 
 // Mock user data
@@ -135,9 +133,9 @@ export function Header() {
             </Tooltip>
             <SheetContent className="overflow-y-auto">
               <SheetHeader>
-                <SheetTitle>{isConnected ? 'Account Connected' : 'Connect'}</SheetTitle>
+                <SheetTitle>{isConnected ? 'Wallet Connected' : 'Connect Wallet'}</SheetTitle>
                 <SheetDescription>
-                  {isConnected ? 'Manage your wallet and account' : 'Connect your Starknet wallet to access'}
+                  {isConnected ? 'Manage your wallet and account' : 'Connect your blockchain wallet to access features'}
                 </SheetDescription>
               </SheetHeader>
               <div className="mt-4">
@@ -155,4 +153,3 @@ export function Header() {
     </TooltipProvider>
   )
 }
-

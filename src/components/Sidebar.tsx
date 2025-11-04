@@ -1,22 +1,23 @@
-"use client"
-
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, PlusCircle, FileText, Users, Settings, Zap, Gift, Search, TrendingUp, Briefcase, ShoppingBag, Newspaper } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
+import { Home, PlusCircle, FileText, Users, Settings, Zap, Gift, Search, TrendingUp, Briefcase, ShoppingBag } from 'lucide-react'
+import { Button } from '@/src/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/src/components/ui/tooltip'
+import { cn } from '@/src/lib/utils'
 
 const navItems = [
   { icon: Home, href: '/', label: 'Dashboard' },
-  { icon: PlusCircle, href: '/new', label: 'New Content' },
-  { icon: Newspaper, href: '/publications', label: 'Publications' },
-  { icon: TrendingUp, href: '/popular', label: 'Popular' },
+  { icon: PlusCircle, href: '/new', label: 'New' },
+  { icon: Search, href: '/explore', label: 'Explore' },
+  { icon: Briefcase, href: '/business-services', label: 'Business Services' },
+  { icon: FileText, href: '/transactions', label: 'Transactions' },
   { icon: Users, href: '/profile', label: 'Profile' },
   { icon: Gift, href: '/rewards', label: 'Rewards' },
-  { icon: Settings, href: '/settings', label: 'Settings' },]
+  { icon: TrendingUp, href: '/popular', label: 'Popular' },
+  { icon: Settings, href: '/settings', label: 'Settings' },
+  { icon: ShoppingBag, href: '/store', label: 'Shop' },
+]
 
 export function Sidebar() {
   const pathname = usePathname()
@@ -28,16 +29,11 @@ export function Sidebar() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/">
-                <Image
-                          src="/Starkz-Symbol.svg"
-                          alt="Starkz"
-                          width={40}
-                          height={40}
-                        />
+                <Zap className="h-6 w-6" />
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">
-              <p>Start</p>
+              <p>Home</p>
             </TooltipContent>
           </Tooltip>
         </div>
@@ -69,4 +65,3 @@ export function Sidebar() {
     </TooltipProvider>
   )
 }
-

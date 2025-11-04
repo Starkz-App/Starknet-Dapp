@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/components/ui/use-toast"
+import { Button } from "@/src/components/ui/button"
+import { useToast } from "@/src/components/ui/use-toast"
 
 export function ExampleToastComponent() {
   const { toast } = useToast()
@@ -11,7 +11,7 @@ export function ExampleToastComponent() {
       onClick={() => {
         toast({
           title: "Scheduled: Catch up",
-          description: "Friday, February 10, 2025 at 5:57 PM",
+          description: "Friday, February 10, 2023 at 5:57 PM",
         })
       }}
     >
@@ -19,4 +19,3 @@ export function ExampleToastComponent() {
     </Button>
   )
 }
-

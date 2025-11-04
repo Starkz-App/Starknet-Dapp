@@ -1,7 +1,7 @@
 import type React from "react"
 import { useState, type KeyboardEvent } from "react"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
+import { Input } from "@/src/components/ui/input"
+import { Badge } from "@/src/components/ui/badge"
 import { X } from "lucide-react"
 
 interface TagInputProps {
@@ -51,4 +51,3 @@ export function TagInput({ tags = [], setTags }: TagInputProps) {
     </div>
   )
 }
-

@@ -1,23 +1,31 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
-import { useToast } from "@/components/ui/use-toast"
-import { Heart, Share2, Zap } from 'lucide-react'
+import { useState } from "react"
+import { Button } from "@/src/components/ui/button"
+import { Input } from "@/src/components/ui/input"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/src/components/ui/dialog"
+import { Label } from "@/src/components/ui/label"
+import { useToast } from "@/src/components/ui/use-toast"
+import { Heart, Share2, Zap } from "lucide-react"
 
 interface PublicationActionsProps {
-  publicationId: string;
-  authorName: string;
-  authorAddress: string;
+  publicationId: string
+  authorName: string
+  authorAddress: string
 }
 
 export function PublicationActions({ publicationId, authorName, authorAddress }: PublicationActionsProps) {
   const [isLiked, setIsLiked] = useState(false)
   const [isStarkDialogOpen, setIsStarkDialogOpen] = useState(false)
-  const [tipAmount, setTipAmount] = useState('')
+  const [tipAmount, setTipAmount] = useState("")
   const { toast } = useToast()
 
   const handleLike = () => {
@@ -39,9 +47,9 @@ export function PublicationActions({ publicationId, authorName, authorAddress }:
   const handleStarkTip = async () => {
     // In a real application, this would interact with a smart contract
     console.log(`Tipping ${tipAmount} Starks to ${authorAddress}`)
-    
+
     // Simulating a blockchain transaction
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    await new Promise((resolve) => setTimeout(resolve, 2000))
 
     toast({
       title: "Tip Sent!",
@@ -49,13 +57,13 @@ export function PublicationActions({ publicationId, authorName, authorAddress }:
     })
 
     setIsStarkDialogOpen(false)
-    setTipAmount('')
+    setTipAmount("")
   }
 
   return (
     <div className="flex space-x-2">
       <Button variant="outline" size="icon" onClick={handleLike}>
-        <Heart className={`h-4 w-4 ${isLiked ? 'fill-current text-red-500' : ''}`} />
+        <Heart className={`h-4 w-4 ${isLiked ? "fill-current text-red-500" : ""}`} />
       </Button>
       <Button variant="outline" size="icon" onClick={handleShare}>
         <Share2 className="h-4 w-4" />
@@ -91,7 +99,9 @@ export function PublicationActions({ publicationId, authorName, authorAddress }:
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" onClick={handleStarkTip}>Send Starks</Button>
+            <Button type="button" onClick={handleStarkTip}>
+              Send Starks
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -99,3 +109,4 @@ export function PublicationActions({ publicationId, authorName, authorAddress }:
   )
 }
 
+export default PublicationActions

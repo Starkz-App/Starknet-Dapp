@@ -1,13 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Zap, Wallet, User, Settings, LogOut, Gift, FileText, Gem, Shield, Coins, BrainCircuit, Brain } from 'lucide-react'
-
-import dynamic from 'next/dynamic';
-const WalletBar = dynamic(() => import('@/components/WalletBar'), { ssr: false })
-
+import { Button } from '@/src/components/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/src/components/ui/avatar'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src/components/ui/card'
+import { Zap, Wallet, User, Settings, LogOut, Gift, FileText } from 'lucide-react'
 
 interface WalletPanelProps {
   isConnected: boolean
@@ -26,30 +22,18 @@ const mockUser = {
   }
 }
 
-
-
-
 const features = [
-  { icon: Brain, title: 'Shared Knowledge', description: 'Decentralized public hub' },
-  { icon: Gem, title: 'Censorship Resistance', description: 'Decentralized and Immutable' },
-  { icon: Shield, title: 'Cryptographic Encryption', description: 'Protection by cutting-edge security' },
-  { icon: Coins, title: 'Earn Crypto', description: 'Your IP earn rewards and royalties' },
+  { icon: Zap, title: 'Fast Transactions', description: 'Lightning-quick blockchain transactions' },
+  { icon: Wallet, title: 'Secure Wallet', description: 'Your assets, protected by cutting-edge security' },
+  { icon: User, title: 'User-Friendly', description: 'Intuitive interface for seamless experience' },
 ]
-
-
-
-
 
 export function WalletPanel({ isConnected, onConnect, onDisconnect }: WalletPanelProps) {
   if (!isConnected) {
     return (
       <div className="space-y-4">
-        {/*<Button onClick={onConnect} className="w-full">Connect Wallet</Button>*/}
-
-        <WalletBar />
-
-
-        <p className="text-sm text-muted-foreground text-center">New to Starknet? <a href="#" className="text-primary">Create your smart account</a></p>
+        <Button onClick={onConnect} className="w-full">Connect Wallet</Button>
+        <p className="text-sm text-muted-foreground text-center">New to blockchain? <a href="#" className="text-primary">Learn more</a></p>
         <div className="grid gap-4 mt-6">
           {features.map((feature, index) => (
             <Card key={index}>
@@ -124,4 +108,3 @@ export function WalletPanel({ isConnected, onConnect, onDisconnect }: WalletPane
     </div>
   )
 }
-

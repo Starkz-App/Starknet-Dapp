@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/src/components/ui/button'
 import { ThumbsUp, Heart, Zap, Crown } from 'lucide-react'
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/src/components/ui/use-toast"
 
 interface ReactionBarProps {
   publicationId: string;
@@ -66,4 +66,3 @@ export function ReactionBar({ publicationId, initialReactions }: ReactionBarProp
     </div>
   )
 }
-

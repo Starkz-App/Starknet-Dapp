@@ -1,5 +1,5 @@
 import React from 'react'
-import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/src/components/ui/drawer"
 import { CheckCircle2, XCircle } from 'lucide-react'
 
 interface SubmissionResultDrawerProps {
@@ -43,4 +43,3 @@ export function SubmissionResultDrawer({ isOpen, onClose, result }: SubmissionRe
     </Drawer>
   )
 }
-
