@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher, clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/", "/assets(.*)", "/publications(.*)", "/onboarding"])
+const isPublicRoute = createRouteMatcher(["/", "/publications(.*)", "/onboarding"])
 
 
 
