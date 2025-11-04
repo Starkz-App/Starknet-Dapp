@@ -79,10 +79,10 @@ export default function OnboardingComponent() {
       const response = await createWalletAsync({
         encryptKey: pin,
         bearerToken: token,
-      });
+      } as any);
       console.log('Wallet creation response:', response);
 
-      if (!response.success || !response.wallet) {
+      if (!response.wallet) {
         throw new Error('Failed to create wallet');
       }
 
