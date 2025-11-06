@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!} signInFallbackRedirectUrl="/" signUpFallbackRedirectUrl="/" afterSignOutUrl="/">
-            <Providers>
+           <ChipiProvider>
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
@@ -42,7 +42,7 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-    </Providers>
+    </ChipiProvider>
   </ClerkProvider>
 
   )
