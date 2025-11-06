@@ -12,7 +12,14 @@ export default function WalletPanel() {
   const { getToken } = useAuth();
   const { data: wallet, isLoading, refetch } = useGetWallet({ getBearerToken: getToken });
 
-  const hasWallet = useMemo(() => !!wallet?.publicKey, [wallet]);
+  const normalizedWallet = useMemo(() => {
+    const publicKey = (wallet as any)?.publicKey ?? (wallet as any)?.walletPublicKey;
+    const normalizedPublicKey = (wallet as any)?.normalizedPublicKey ?? (wallet as any)?.walletPublicKey ?? publicKey;
+    const encryptedPrivateKey = (wallet as any)?.encryptedPrivateKey ?? (wallet as any)?.walletEncryptedPrivateKey ?? (wallet as any)?.encryptedKey;
+    return { publicKey, normalizedPublicKey, encryptedPrivateKey } as { publicKey?: string; normalizedPublicKey?: string; encryptedPrivateKey?: string };
+  }, [wallet]);
+
+  const hasWallet = !!normalizedWallet.publicKey;
 
   return (
     <SignedIn>
@@ -30,10 +37,10 @@ export default function WalletPanel() {
           {!isLoading && hasWallet && (
             <div className="space-y-4">
               <WalletSummary
-                normalizedPublicKey={wallet.normalizedPublicKey}
-                walletPublicKey={wallet.publicKey}
+                normalizedPublicKey={normalizedWallet.normalizedPublicKey as string}
+                walletPublicKey={normalizedWallet.publicKey as string}
               />
-              <SendUsdcDialog wallet={wallet} />
+              <SendUsdcDialog wallet={normalizedWallet as any} />
             </div>
           )}
         </CardContent>
