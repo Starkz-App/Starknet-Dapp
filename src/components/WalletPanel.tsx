@@ -29,10 +29,34 @@ export default function WalletPanel() {
     checkToken();
   }, [authLoaded, userLoaded, user, getToken]);
 
-  // Only fetch wallet when we have a token and user
-  const shouldFetch = tokenReady && !!user;
+  // Create a stable token getter that ensures we have a valid token
+  const tokenGetter = useMemo(() => {
+    return async () => {
+      // Wait for token to be ready
+      if (!tokenReady || !user) {
+        // Wait a bit and retry if still not ready
+        await new Promise(resolve => setTimeout(resolve, 100));
+        if (!tokenReady || !user) {
+          throw new Error("Authentication not ready");
+        }
+      }
+      try {
+        const token = await getToken();
+        if (!token) {
+          throw new Error("No authentication token available");
+        }
+        return token;
+      } catch (error) {
+        console.error("Error getting token in wallet fetch:", error);
+        throw error;
+      }
+    };
+  }, [tokenReady, user, getToken]);
+
+  // Always call the hook (required by React rules)
+  // The hook should handle empty token gracefully or we'll handle the error
   const { data: wallet, isLoading, error, refetch } = useGetWallet({ 
-    getBearerToken: shouldFetch ? getToken : async () => null
+    getBearerToken: tokenGetter
   });
 
   // Debug logging
@@ -125,6 +149,13 @@ export default function WalletPanel() {
     String(error).includes("No wallet")
   );
 
+  // Check if error is due to missing input (token not ready)
+  const isInputRequiredError = error && (
+    String(error).includes("Input is required") ||
+    String(error).includes("required") ||
+    (!tokenReady && error)
+  );
+
   return (
     <SignedIn>
       <Card className="glass-card border-0">
@@ -146,14 +177,14 @@ export default function WalletPanel() {
             <p className="text-sm text-muted-foreground">Loading wallet...</p>
           )}
           
-          {tokenReady && error && !isNotFoundError && (
+          {tokenReady && error && !isNotFoundError && !isInputRequiredError && (
             <div className="space-y-2">
               <p className="text-sm text-destructive">Error loading wallet: {String(error)}</p>
               <Button variant="outline" size="sm" onClick={() => refetch()}>Retry</Button>
             </div>
           )}
           
-          {tokenReady && !isLoading && (isNotFoundError || (!error && !hasWallet)) && (
+          {tokenReady && !isLoading && (isNotFoundError || isInputRequiredError || (!error && !hasWallet)) && (
             <div className="space-y-4">
               <p className="text-sm text-muted-foreground">
                 No wallet found. Create one to start using USDC.
