@@ -27,9 +27,6 @@ export default function WalletPanel() {
         </CardHeader>
         <CardContent>
           {isLoading && <p>Loading wallet...</p>}
-          {!isLoading && !hasWallet && (
-            <p className="text-sm text-muted-foreground">No wallet found. Create one to start using USDC.</p>
-          )}
           {!isLoading && hasWallet && (
             <div className="space-y-4">
               <WalletSummary
