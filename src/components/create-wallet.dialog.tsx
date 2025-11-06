@@ -22,18 +22,19 @@ import {
   FormMessage,
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
+import PinInput from "@/src/components/PinInput";
 import { CheckCircleIcon } from "lucide-react";
 import { useCreateWallet } from "@chipi-stack/nextjs";
 import { useAuth } from "@clerk/nextjs";
 
 const FormSchema = z
   .object({
-    pin: z.string().min(4, {
-      message: "PIN must be 4 characters.",
-    }),
-    confirmPin: z.string().min(4, {
-      message: "Confirm PIN must be 4 characters.",
-    }),
+    pin: z
+      .string()
+      .regex(/^\d{4}$/, { message: "Enter exactly 4 digits" }),
+    confirmPin: z
+      .string()
+      .regex(/^\d{4}$/, { message: "Enter exactly 4 digits" }),
   })
   .refine((data) => data.pin === data.confirmPin, {
     message: "PINs don't match",
@@ -102,8 +103,9 @@ export function CreateWalletDialog() {
                   <FormItem>
                     <FormLabel>Enter PIN</FormLabel>
                     <FormControl>
-                      <Input type="password" maxLength={4} inputMode="numeric" pattern="\\d*" {...field} />
+                      <PinInput value={field.value} onChange={field.onChange} autoFocus />
                     </FormControl>
+                    <p className="text-xs text-muted-foreground">4 digits. Keep this PIN safe.</p>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -116,7 +118,7 @@ export function CreateWalletDialog() {
                   <FormItem>
                     <FormLabel>Confirm PIN</FormLabel>
                     <FormControl>
-                      <Input type="password" maxLength={4} inputMode="numeric" pattern="\\d*" {...field} />
+                      <PinInput value={field.value} onChange={field.onChange} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

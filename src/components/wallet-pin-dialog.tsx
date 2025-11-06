@@ -10,7 +10,7 @@ import {
   DialogFooter,
 } from "@/src/components/ui/dialog";
 import { Label } from "@/src/components/ui/label";
-import { Input } from "@/src/components/ui/input";
+import PinInput from "@/src/components/PinInput";
 
 export default function WalletPinDialog({
   open,
@@ -45,15 +45,7 @@ export default function WalletPinDialog({
             Your wallet is protected — enter your PIN to continue.
           </DialogDescription>
           <Label>PIN (4 digits)</Label>
-          <Input
-            maxLength={4}
-            value={pin}
-            type="password"
-            onChange={(e) => setPin(e.target.value)}
-            inputMode="numeric"
-            pattern="\\d*"
-            autoComplete="off"
-          />
+          <PinInput value={pin} onChange={setPin} autoFocus />
         </DialogHeader>
         <DialogFooter>
           <Button type="button" disabled={disabled} onClick={handleSubmit}>
