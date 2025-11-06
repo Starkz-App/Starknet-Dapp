@@ -32,17 +32,24 @@ export default function WalletPanel() {
   // Create a stable token getter that ensures we have a valid token
   const tokenGetter = useMemo(() => {
     return async () => {
+      console.log("Token getter called - tokenReady:", tokenReady, "user:", !!user);
+      
       // Wait for token to be ready
       if (!tokenReady || !user) {
+        console.log("Token not ready, waiting...");
         // Wait a bit and retry if still not ready
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 200));
         if (!tokenReady || !user) {
+          console.error("Token still not ready after wait");
           throw new Error("Authentication not ready");
         }
       }
+      
       try {
         const token = await getToken();
+        console.log("Token retrieved, length:", token?.length || 0);
         if (!token) {
+          console.error("No token returned from getToken()");
           throw new Error("No authentication token available");
         }
         return token;
@@ -140,17 +147,28 @@ export default function WalletPanel() {
     );
   }
 
+  // Check if error is a 401 (authentication issue)
+  const isUnauthorizedError = error && (
+    (error as any)?.status === 401 ||
+    (error as any)?.response?.status === 401 ||
+    (error as any)?.statusCode === 401 ||
+    String(error).includes("401") ||
+    String(error).toLowerCase().includes("unauthorized") ||
+    String(error).toLowerCase().includes("missing or invalid authorization")
+  );
+
   // Check if error is a 404 (no wallet) vs actual error
-  const isNotFoundError = error && (
+  const isNotFoundError = error && !isUnauthorizedError && (
     (error as any)?.status === 404 || 
     (error as any)?.response?.status === 404 ||
+    (error as any)?.statusCode === 404 ||
     String(error).includes("404") ||
-    String(error).includes("not found") ||
-    String(error).includes("No wallet")
+    String(error).toLowerCase().includes("not found") ||
+    String(error).toLowerCase().includes("no wallet")
   );
 
   // Check if error is due to missing input (token not ready)
-  const isInputRequiredError = error && (
+  const isInputRequiredError = error && !isUnauthorizedError && (
     String(error).includes("Input is required") ||
     String(error).includes("required") ||
     (!tokenReady && error)
@@ -177,7 +195,28 @@ export default function WalletPanel() {
             <p className="text-sm text-muted-foreground">Loading wallet...</p>
           )}
           
-          {tokenReady && error && !isNotFoundError && !isInputRequiredError && (
+          {tokenReady && error && isUnauthorizedError && (
+            <div className="space-y-2">
+              <p className="text-sm text-destructive">Authentication error. Please try refreshing the page.</p>
+              <Button variant="outline" size="sm" onClick={() => {
+                // Force token refresh and retry
+                setTokenReady(false);
+                setTimeout(async () => {
+                  try {
+                    const token = await getToken();
+                    setTokenReady(!!token);
+                    if (token) {
+                      refetch();
+                    }
+                  } catch (err) {
+                    console.error("Error refreshing token:", err);
+                  }
+                }, 500);
+              }}>Retry Authentication</Button>
+            </div>
+          )}
+          
+          {tokenReady && error && !isUnauthorizedError && !isNotFoundError && !isInputRequiredError && (
             <div className="space-y-2">
               <p className="text-sm text-destructive">Error loading wallet: {String(error)}</p>
               <Button variant="outline" size="sm" onClick={() => refetch()}>Retry</Button>
