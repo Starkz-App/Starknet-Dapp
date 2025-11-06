@@ -105,7 +105,7 @@ export function CreateWalletDialog() {
                     <FormControl>
                       <PinInput value={field.value} onChange={field.onChange} autoFocus />
                     </FormControl>
-                    <p className="text-xs text-muted-foreground">4 digits. Keep this PIN safe.</p>
+                    <p className="text-xs text-muted-foreground">4 digits. Keep this PIN safe and do not share it.</p>
                     <FormMessage />
                   </FormItem>
                 )}
