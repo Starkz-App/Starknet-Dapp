@@ -26,6 +26,7 @@ import { Badge } from "@/src/components/ui/badge"
 import { Input } from "@/src/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
 import Link from "next/link"
+import WalletPanel from "@/src/components/WalletPanel"
 import Image from "next/image"
 
 // Mock data for featured collections
@@ -54,6 +55,7 @@ export default function Home() {
 
   return (
     <div className="space-y-12 max-w-7xl mx-auto">
+      <WalletPanel />
       {/* Hero Section */}
       <section className="relative h-[500px] rounded-3xl overflow-hidden glass-card">
         <Image

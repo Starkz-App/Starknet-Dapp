@@ -7,16 +7,8 @@ import { AnimatedBackground } from "@/src/components/AnimatedBackground"
 import { Toaster } from "@/src/components/ui/toaster"
 import { FloatingNavbar } from "@/src/components/FloatingNavbar"
 import { ChatBox } from "@/src/components/ChatBox"
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
 import { ChipiProvider } from "@chipi-stack/nextjs";
-import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -44,6 +36,5 @@ export default function RootLayout({
     </html>
     </ChipiProvider>
   </ClerkProvider>
-
   )
 }
