@@ -20,7 +20,7 @@ export default function WalletPanel() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Wallet</CardTitle>
           {!hasWallet ? (
-            <CreateWalletDialog />
+            <CreateWalletDialog onSuccess={() => refetch()} />
           ) : (
             <Button variant="outline" onClick={() => refetch()}>Refresh</Button>
           )}

@@ -41,7 +41,7 @@ const FormSchema = z
     path: ["confirmPin"],
   });
 
-export function CreateWalletDialog() {
+export function CreateWalletDialog({ onSuccess }: { onSuccess?: () => void }) {
   const { toast } = useToast();
   const { getToken, userId: clerkUserId } = useAuth();
   const {
@@ -76,6 +76,7 @@ export function CreateWalletDialog() {
       });
       toast({ title: "Wallet created successfully!" });
       form.reset();
+      onSuccess?.();
     } catch (error) {
       toast({ title: "Failed to create wallet", variant: "destructive" });
       console.error("Wallet creation error:", error);
