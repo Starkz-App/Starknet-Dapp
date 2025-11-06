@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/src/components/ui/use-toast";
@@ -44,6 +45,7 @@ const FormSchema = z
 export function CreateWalletDialog({ onSuccess }: { onSuccess?: () => void }) {
   const { toast } = useToast();
   const { getToken, userId: clerkUserId } = useAuth();
+  const [open, setOpen] = useState(false);
   const {
     createWalletAsync,
     isLoading,
@@ -76,14 +78,24 @@ export function CreateWalletDialog({ onSuccess }: { onSuccess?: () => void }) {
       });
       toast({ title: "Wallet created successfully!" });
       form.reset();
-      onSuccess?.();
-    } catch (error) {
-      toast({ title: "Failed to create wallet", variant: "destructive" });
+      // Close dialog after a short delay to show success message
+      setTimeout(() => {
+        setOpen(false);
+        onSuccess?.();
+      }, 1500);
+    } catch (error: any) {
+      const errorMessage = error?.message || "Failed to create wallet";
+      toast({ 
+        title: errorMessage.includes("already exists") || errorMessage.includes("already have") 
+          ? "Wallet already exists" 
+          : "Failed to create wallet", 
+        variant: "destructive" 
+      });
       console.error("Wallet creation error:", error);
     }
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Create Wallet</Button>
       </DialogTrigger>
