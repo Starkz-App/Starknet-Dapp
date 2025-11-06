@@ -52,16 +52,7 @@ export default function WalletPanel() {
   }, [tokenReady, user, getToken]);
 
   // Create a simple token getter that returns the stored token
-  const tokenGetter = useMemo(() => {
-    return async () => {
-      console.log("Token getter called - actualToken available:", !!actualToken);
-      if (!actualToken) {
-        console.error("No token available in getter");
-        throw new Error("No authentication token available");
-      }
-      return actualToken;
-    };
-  }, [actualToken]);
+  // (removed a simpler getter here in favor of a single, later definition)
 
   // Only call the hook when we have a token ready
   const shouldFetchWallet = tokenReady && !!user && !!actualToken;
