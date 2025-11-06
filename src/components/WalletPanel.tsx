@@ -29,42 +29,69 @@ export default function WalletPanel() {
     checkToken();
   }, [authLoaded, userLoaded, user, getToken]);
 
-  // Create a stable token getter that ensures we have a valid token
-  const tokenGetter = useMemo(() => {
-    return async () => {
-      console.log("Token getter called - tokenReady:", tokenReady, "user:", !!user);
-      
-      // Wait for token to be ready
-      if (!tokenReady || !user) {
-        console.log("Token not ready, waiting...");
-        // Wait a bit and retry if still not ready
-        await new Promise(resolve => setTimeout(resolve, 200));
-        if (!tokenReady || !user) {
-          console.error("Token still not ready after wait");
-          throw new Error("Authentication not ready");
+  // Store the actual token once ready
+  const [actualToken, setActualToken] = useState<string | null>(null);
+  
+  // Get and store the token when ready
+  useEffect(() => {
+    const fetchToken = async () => {
+      if (tokenReady && user) {
+        try {
+          const token = await getToken();
+          console.log("Token fetched and stored, length:", token?.length || 0);
+          setActualToken(token);
+        } catch (error) {
+          console.error("Error fetching token:", error);
+          setActualToken(null);
         }
-      }
-      
-      try {
-        const token = await getToken();
-        console.log("Token retrieved, length:", token?.length || 0);
-        if (!token) {
-          console.error("No token returned from getToken()");
-          throw new Error("No authentication token available");
-        }
-        return token;
-      } catch (error) {
-        console.error("Error getting token in wallet fetch:", error);
-        throw error;
+      } else {
+        setActualToken(null);
       }
     };
+    fetchToken();
   }, [tokenReady, user, getToken]);
 
+  // Create a simple token getter that returns the stored token
+  const tokenGetter = useMemo(() => {
+    return async () => {
+      console.log("Token getter called - actualToken available:", !!actualToken);
+      if (!actualToken) {
+        console.error("No token available in getter");
+        throw new Error("No authentication token available");
+      }
+      return actualToken;
+    };
+  }, [actualToken]);
+
+  // Only call the hook when we have a token ready
+  const shouldFetchWallet = tokenReady && !!user && !!actualToken;
+  
+  // Create a token getter that always returns a valid token or throws a clear error
+  const tokenGetter = useMemo(() => {
+    if (!shouldFetchWallet || !actualToken) {
+      // Return a function that throws immediately if not ready
+      // This prevents the hook from trying to make a request
+      return async () => {
+        throw new Error("Wallet fetch not ready - token not available");
+      };
+    }
+    
+    // Return a function that always returns the stored token
+    return async () => {
+      console.log("Token getter called - returning stored token");
+      return actualToken;
+    };
+  }, [shouldFetchWallet, actualToken]);
+  
   // Always call the hook (required by React rules)
-  // The hook should handle empty token gracefully or we'll handle the error
-  const { data: wallet, isLoading, error, refetch } = useGetWallet({ 
-    getBearerToken: tokenGetter
+  // The hook should handle errors gracefully
+  const walletQueryResult = useGetWallet({ 
+    getBearerToken: tokenGetter,
+    // Try to pass enabled option if the hook supports it (React Query pattern)
+    ...(shouldFetchWallet ? {} : { enabled: false } as any)
   });
+  
+  const { data: wallet, isLoading, error, refetch } = walletQueryResult;
 
   // Debug logging
   useEffect(() => {
@@ -72,12 +99,22 @@ export default function WalletPanel() {
       console.log("=== Wallet Panel Debug ===");
       console.log("User:", user?.id);
       console.log("Token ready:", tokenReady);
+      console.log("Actual token stored:", !!actualToken);
+      console.log("Should fetch wallet:", shouldFetchWallet);
       console.log("Wallet data:", wallet);
       console.log("Is loading:", isLoading);
       console.log("Error:", error);
+      if (error) {
+        console.log("Error details:", {
+          message: (error as any)?.message,
+          status: (error as any)?.status,
+          statusCode: (error as any)?.statusCode,
+          response: (error as any)?.response,
+        });
+      }
       console.log("Raw wallet object:", JSON.stringify(wallet, null, 2));
     }
-  }, [wallet, isLoading, error, tokenReady, authLoaded, userLoaded, user]);
+  }, [wallet, isLoading, error, tokenReady, actualToken, shouldFetchWallet, authLoaded, userLoaded, user]);
 
   const normalizedWallet = useMemo(() => {
     if (!wallet) return null;
