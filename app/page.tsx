@@ -80,14 +80,15 @@ export default function Home() {
               <div className="p-2 md:p-3 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex-shrink-0">
                 <Flame className="h-5 w-5 md:h-7 md:w-7 text-orange-500" />
               </div>
-              <span className="text-2xl md:text-4xl">Trending Now</span>
-            </motion.h2>
-            <Button variant="ghost" className="group self-start sm:self-center" asChild>
+              <span className="text-2xl md:text-4xl">Latest</span>
+              <Button variant="ghost" className="group self-start sm:self-center" asChild>
               <Link href="/explore">
                 View All
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
+            </motion.h2>
+            
           </div>
 
           <StarkzPostCard post={currentPosts[0]} variant="featured" />

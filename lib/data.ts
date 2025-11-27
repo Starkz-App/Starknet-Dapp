@@ -36,8 +36,8 @@ export interface Publication {
 export const authors: Author[] = [
   {
     id: "1",
-    name: "Dr. Eli Ben-Sasson",
-    slug: "eli-ben-sasson",
+    name: "Dr. Elin",
+    slug: "eli-stark",
     username: "elibs",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Eli",
     bio: "Cryptography expert and co-founder of StarkWare. Pioneering zero-knowledge proof systems and blockchain scalability solutions.",

@@ -17,6 +17,7 @@ import {
   XCircle,
   Menu,
   X,
+  Stars,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "./ThemeToggle"
@@ -28,17 +29,15 @@ import { mockNotifications, type Notification } from "@/lib/mockNotifications"
 import { cn } from "@/lib/utils"
 
 const mainNavItems = [
-  { icon: Home, href: "/", label: "Home" },
+  { icon: Stars, href: "/", label: "Home" },
   { icon: Search, href: "/explore", label: "Explore" },
   { icon: PlusCircle, href: "/new", label: "Create" },
-  { icon: ShoppingBag, href: "/store", label: "Store" },
 ]
 
 const moreNavItems = [
-  { icon: Home, href: "/", label: "Dashboard" },
+  { icon: Stars, href: "/", label: "Dashboard" },
   { icon: PlusCircle, href: "/new", label: "New" },
   { icon: Search, href: "/explore", label: "Explore" },
-  { icon: ShoppingBag, href: "/store", label: "Shop" },
 ]
 
 export function FloatingNavbar() {
@@ -210,8 +209,8 @@ export function FloatingNavbar() {
       </nav>
 
       {/* Mobile Bottom Navbar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe">
-        <div className="glass-navbar-mobile border-t border-border/50 px-2 py-3">
+      <nav className="md:hidden fixed bottom-0 left-10 right-10 z-50 pb-safe">
+        <div className="bg-white/60 dark:bg-black/60 border-t border-border/50 px-1 py-1 rounded-lg">
           <div className="flex items-center justify-around max-w-lg mx-auto">
             {mainNavItems.map((item) => (
               <Link key={item.href} href={item.href}>
