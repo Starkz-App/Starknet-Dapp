@@ -1,6 +1,6 @@
 {
   "name": "starkz",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,9 +9,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@ai-sdk/react": "2.0.82",
-    "@chipi-stack/nextjs": "^11.7.0",
-    "@clerk/nextjs": "^6.34.1",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
@@ -41,18 +38,16 @@
     "@radix-ui/react-toggle-group": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.6",
     "@vercel/analytics": "1.3.1",
-    "ai": "^5.0.86",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
     "date-fns": "4.1.0",
     "embla-carousel-react": "8.5.1",
-    "framer-motion": "12.23.24",
     "geist": "^1.3.1",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
-    "next": "^14.2.33",
+    "next": "14.2.25",
     "next-themes": "^0.4.4",
     "react": "^19",
     "react-day-picker": "9.8.0",
@@ -64,7 +59,10 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
-    "zod": "^3.24.1"
+    "zod": "^3.24.1",
+    "framer-motion": "12.23.24",
+    "@ai-sdk/react": "2.0.82",
+    "ai": "4.3.19"
   },
   "devDependencies": {
     "@types/node": "^22",
