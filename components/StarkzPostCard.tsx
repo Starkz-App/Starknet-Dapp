@@ -83,7 +83,7 @@ export function StarkzPostCard({ post, index = 0, variant = "default" }: StarkzP
       transition: {
         duration: 0.6,
         delay: index * 0.1,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: "easeInOut",
       },
     },
   }
@@ -118,7 +118,6 @@ export function StarkzPostCard({ post, index = 0, variant = "default" }: StarkzP
         ref={cardRef}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        variants={cardVariants}
         className="group cursor-pointer perspective-1000"
         onClick={handleCardClick}
       >
@@ -274,7 +273,6 @@ export function StarkzPostCard({ post, index = 0, variant = "default" }: StarkzP
       ref={cardRef}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      variants={cardVariants}
       whileHover={{ y: -8, scale: 1.02 }}
       className="group cursor-pointer transform-gpu"
       onClick={handleCardClick}

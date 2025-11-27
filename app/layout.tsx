@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/ThemeProvider"
 import { AnimatedBackground } from "@/components/AnimatedBackground"
 import { Toaster } from "@/components/ui/toaster"
 import { FloatingNavbar } from "@/components/FloatingNavbar"
-import { ChatBox } from "@/components/ChatBox"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -27,7 +26,6 @@ export default function RootLayout({
           <AnimatedBackground />
           <main className="min-h-screen overflow-x-hidden overflow-y-auto p-4 md:p-6 pb-24 md:pb-32">{children}</main>
           <FloatingNavbar />
-          <ChatBox />
           <Toaster />
         </ThemeProvider>
       </body>
